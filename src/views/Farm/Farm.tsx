@@ -1,20 +1,20 @@
-import React, { useEffect, useMemo } from '../Claims/node_modules/react'
-import { useParams } from '../Claims/node_modules/react-router-dom'
-import styled from '../Claims/components/node_modules/styled-components'
-import { useWallet } from '../Claims/node_modules/use-wallet'
+import React, { useEffect, useMemo } from 'react'
+import { useParams } from 'react-router-dom'
+import styled from 'styled-components'
+import { useWallet } from 'use-wallet'
 import { provider } from 'web3-core'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
-import useDig from '../../hooks/useDig'
+import useFarm from '../../hooks/useFarm'
 import useRedeem from '../../hooks/useRedeem'
-import useDefiGold from '../../hooks/useStake'
-import { getMiningManagerContract } from '../../defigold/utils'
+import useDefiGold from '../../hooks/useDefiGold'
+import { getMiningManagerContract } from '../../dgld/utils'
 import { getContract } from '../../utils/erc20'
 import Harvest from './components/Harvest'
 import Stake from './components/Stake'
 
-const Dig: React.FC = () => {
-  const { digId } = useParams()
+const Farm: React.FC = () => {
+  const { farmId } = useParams()
   const {
     pid,
     lpToken,
@@ -23,7 +23,7 @@ const Dig: React.FC = () => {
     earnToken,
     name,
     icon,
-  } = useDig(digId) || {
+  } = useFarm(farmId) || {
     pid: 0,
     lpToken: '',
     lpTokenAddress: '',
@@ -37,14 +37,14 @@ const Dig: React.FC = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  const defiGold = useDefiGold()
+  const dgld = useDefiGold()
   const { ethereum } = useWallet()
 
   const lpContract = useMemo(() => {
     return getContract(ethereum as provider, lpTokenAddress)
   }, [ethereum, lpTokenAddress])
 
-  const { onRedeem } = useRedeem(getMiningManagerContract(defiGold))
+  const { onRedeem } = useRedeem(getMiningManagerContract(dgld))
 
   const lpTokenName = useMemo(() => {
     return lpToken.toUpperCase()
@@ -61,7 +61,7 @@ const Dig: React.FC = () => {
         subtitle={`Deposit ${lpTokenName}  Tokens and earn ${earnTokenName}`}
         title={name}
       />
-      <StyledDig>
+      <StyledFarm>
         <StyledCardsWrapper>
           <StyledCardWrapper>
             <Harvest pid={pid} />
@@ -78,15 +78,15 @@ const Dig: React.FC = () => {
         <Spacer size="lg" />
         <StyledInfo>
           ⭐️ Every time you stake and unstake LP tokens, the contract will
-          dig your DefiGold rewards for you!
+          automagically harvest DGLD rewards for you!
         </StyledInfo>
         <Spacer size="lg" />
-      </StyledDig>
+      </StyledFarm>
     </>
   )
 }
 
-const StyledDig = styled.div`
+const StyledFarm = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -123,4 +123,4 @@ const StyledInfo = styled.h3`
   text-align: center;
 `
 
-export default Dig
+export default Farm

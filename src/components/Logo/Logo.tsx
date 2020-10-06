@@ -1,12 +1,12 @@
-import React from '../../views/Claims/node_modules/react'
-import { Link } from '../../views/Claims/node_modules/react-router-dom'
-import styled from '../../views/Claims/components/node_modules/styled-components'
-import manager from '../../assets/img/manager.png'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import chef from '../../assets/img/chef.png'
 
 const Logo: React.FC = () => {
   return (
     <StyledLogo to="/">
-      <img src={manager} height="32" style={{ marginTop: -4 }} />
+      <img src={chef} height="32" style={{ marginTop: -4 }} />
       <StyledText>
         DefiGold <MiningManagerText>MiningManager</MiningManagerText>
       </StyledText>

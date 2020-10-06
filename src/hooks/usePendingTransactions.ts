@@ -1,4 +1,4 @@
-import { useContext } from '../views/Claims/node_modules/react'
+import { useContext } from 'react'
 import { Context } from '../contexts/Transactions'
 
 const usePendingTransactions = () => {

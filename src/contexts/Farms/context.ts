@@ -1,8 +1,8 @@
-import { createContext } from '../../views/Claims/node_modules/react'
-import { ClaimsContext } from './types'
+import { createContext } from 'react'
+import { FarmsContext } from './types'
 
-const context = createContext<ClaimsContext>({
-  claims: [],
+const context = createContext<FarmsContext>({
+  farms: [],
   unharvested: 0,
 })
 

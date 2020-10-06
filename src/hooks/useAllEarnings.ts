@@ -1,35 +1,35 @@
-import { useCallback, useEffect, useState } from '../views/Claims/node_modules/react'
-import { provider } from '../views/Dig/node_modules/web3-core'
+import { useCallback, useEffect, useState } from 'react'
+import { provider } from 'web3-core'
 
-import BigNumber from '../defigold/node_modules/bignumber.js.js'
-import { useWallet } from '../views/Claims/node_modules/use-wallet'
+import BigNumber from 'bignumber.js'
+import { useWallet } from 'use-wallet'
 
-import { getEarned, getMiningManagerContract, getClaims } from '../defigold/utils'
-import useDefiGold from './useStake'
+import { getEarned, getMiningManagerContract, getFarms } from '../dgld/utils'
+import useDefiGold from './useDefiGold'
 import useBlock from './useBlock'
 
 const useAllEarnings = () => {
   const [balances, setBalance] = useState([] as Array<BigNumber>)
   const { account }: { account: string; ethereum: provider } = useWallet()
-  const defiGold = useDefiGold()
-  const claims = getClaims(defiGold)
-  const miningManagerContract = getMiningManagerContract(defiGold)
+  const dgld = useDefiGold()
+  const farms = getFarms(dgld)
+  const miningManagerContract = getMiningManagerContract(dgld)
   const block = useBlock()
 
   const fetchAllBalances = useCallback(async () => {
     const balances: Array<BigNumber> = await Promise.all(
-      claims.map(({ pid }: { pid: number }) =>
+      farms.map(({ pid }: { pid: number }) =>
         getEarned(miningManagerContract, pid, account),
       ),
     )
     setBalance(balances)
-  }, [account, miningManagerContract, defiGold])
+  }, [account, miningManagerContract, dgld])
 
   useEffect(() => {
-    if (account && miningManagerContract && defiGold) {
+    if (account && miningManagerContract && dgld) {
       fetchAllBalances()
     }
-  }, [account, block, miningManagerContract, setBalance, defiGold])
+  }, [account, block, miningManagerContract, setBalance, dgld])
 
   return balances
 }

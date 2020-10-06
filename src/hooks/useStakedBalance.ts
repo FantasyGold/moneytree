@@ -1,29 +1,29 @@
-import { useCallback, useEffect, useState } from '../views/Claims/node_modules/react'
+import { useCallback, useEffect, useState } from 'react'
 
-import BigNumber from '../defigold/node_modules/bignumber.js.js'
-import { useWallet } from '../views/Claims/node_modules/use-wallet'
+import BigNumber from 'bignumber.js'
+import { useWallet } from 'use-wallet'
 
-import { getStaked, getMiningManagerContract } from '../defigold/utils'
-import useDefiGold from './useStake'
+import { getStaked, getMiningManagerContract } from '../dgld/utils'
+import useDefiGold from './useDefiGold'
 import useBlock from './useBlock'
 
 const useStakedBalance = (pid: number) => {
   const [balance, setBalance] = useState(new BigNumber(0))
   const { account }: { account: string } = useWallet()
-  const defiGold = useDefiGold()
-  const miningManagerContract = getMiningManagerContract(defiGold)
+  const dgld = useDefiGold()
+  const miningManagerContract = getMiningManagerContract(dgld)
   const block = useBlock()
 
   const fetchBalance = useCallback(async () => {
     const balance = await getStaked(miningManagerContract, pid, account)
     setBalance(new BigNumber(balance))
-  }, [account, pid, defiGold])
+  }, [account, pid, dgld])
 
   useEffect(() => {
-    if (account && defiGold) {
+    if (account && dgld) {
       fetchBalance()
     }
-  }, [account, pid, setBalance, block, defiGold])
+  }, [account, pid, setBalance, block, dgld])
 
   return balance
 }

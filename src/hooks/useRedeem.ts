@@ -1,7 +1,7 @@
-import { useCallback } from '../views/Claims/node_modules/react'
-import { useWallet } from '../views/Claims/node_modules/use-wallet'
-import { Contract } from '../views/Dig/components/node_modules/web3-eth-contract'
-import { redeem } from '../defigold/utils'
+import { useCallback } from 'react'
+import { useWallet } from 'use-wallet'
+import { Contract } from 'web3-eth-contract'
+import { redeem } from '../dgld/utils'
 
 const useRedeem = (miningManagerContract: Contract) => {
   const { account } = useWallet()

@@ -1,6 +1,6 @@
-import React from '../../../views/Claims/node_modules/react'
-import { NavLink } from '../../../views/Claims/node_modules/react-router-dom'
-import styled from '../../../views/Claims/components/node_modules/styled-components'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
+import styled from 'styled-components'
 
 const Nav: React.FC = () => {
   return (
@@ -8,14 +8,14 @@ const Nav: React.FC = () => {
       <StyledLink exact activeClassName="active" to="/">
         Home
       </StyledLink>
-      <StyledLink exact activeClassName="active" to="/claims">
-        Mining Claims
+      <StyledLink exact activeClassName="active" to="/farms">
+        Menu
       </StyledLink>
       <StyledLink exact activeClassName="active" to="/staking">
         Staking
       </StyledLink>
       <StyledAbsoluteLink
-        href="https://github/fantasygold"
+        href="https://medium.com/dgldswap/the-dgldswap-project-c4049ea9941e"
         target="_blank"
       >
         About

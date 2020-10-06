@@ -1,6 +1,6 @@
-import { Contract } from '../../views/Dig/components/node_modules/web3-eth-contract'
+import { Contract } from 'web3-eth-contract'
 
-export interface Dig {
+export interface Farm {
   pid: number
   name: string
   lpToken: string
@@ -14,7 +14,7 @@ export interface Dig {
   tokenSymbol: string
 }
 
-export interface ClaimsContext {
-  claims: Dig[]
+export interface FarmsContext {
+  farms: Farm[]
   unharvested: number
 }

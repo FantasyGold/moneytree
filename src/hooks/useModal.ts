@@ -1,4 +1,4 @@
-import { useCallback, useContext } from '../views/Claims/node_modules/react'
+import { useCallback, useContext } from 'react'
 import { Context } from '../contexts/Modals'
 
 const useModal = (modal: React.ReactNode, key?: string) => {

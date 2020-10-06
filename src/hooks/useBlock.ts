@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from '../views/Claims/node_modules/react'
-import Web3 from '../defigold/node_modules/web3'
-import { provider } from '../views/Dig/node_modules/web3-core'
-import { useWallet } from '../views/Claims/node_modules/use-wallet'
+import { useCallback, useEffect, useState } from 'react'
+import Web3 from 'web3'
+import { provider } from 'web3-core'
+import { useWallet } from 'use-wallet'
 // import debounce from 'debounce'
 
 const useBlock = () => {

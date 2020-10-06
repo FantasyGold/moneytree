@@ -1,5 +1,5 @@
-import React, { useContext } from '../../views/Claims/node_modules/react'
-import { ThemeContext } from '../../views/Claims/components/node_modules/styled-components'
+import React, { useContext } from 'react'
+import { ThemeContext } from 'styled-components'
 
 import { IconProps } from '../Icon'
 

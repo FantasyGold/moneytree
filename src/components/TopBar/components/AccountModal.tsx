@@ -1,9 +1,9 @@
-import React, { useCallback } from '../../../views/Claims/node_modules/react'
-import styled from '../../../views/Claims/components/node_modules/styled-components'
-import { useWallet } from '../../../views/Claims/node_modules/use-wallet'
+import React, { useCallback } from 'react'
+import styled from 'styled-components'
+import { useWallet } from 'use-wallet'
 import useTokenBalance from '../../../hooks/useTokenBalance'
-import useDefiGold from '../../../hooks/useStake'
-import { getDefiGoldAddress } from '../../../defigold/utils'
+import useDefiGold from '../../../hooks/useDefiGold'
+import { getDefiGoldAddress } from '../../../dgld/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import Button from '../../Button'
 import CardIcon from '../../CardIcon'
@@ -23,8 +23,8 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
     reset()
   }, [onDismiss, reset])
 
-  const defiGold = useDefiGold()
-  const defiGoldBalance = useTokenBalance(getDefiGoldAddress(defiGold))
+  const dgld = useDefiGold()
+  const dgldBalance = useTokenBalance(getDefiGoldAddress(dgld))
 
   return (
     <Modal>
@@ -35,10 +35,10 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
         <div style={{ display: 'flex' }}>
           <StyledBalanceWrapper>
             <CardIcon>
-              <span>🍣</span>
+              <span>💰</span>
             </CardIcon>
             <StyledBalance>
-              <Value value={getBalanceNumber(defiGoldBalance)} />
+              <Value value={getBalanceNumber(dgldBalance)} />
               <Label text="DGLD Balance" />
             </StyledBalance>
           </StyledBalanceWrapper>

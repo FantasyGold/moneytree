@@ -1,20 +1,20 @@
-import { useCallback } from '../views/Claims/node_modules/react'
+import { useCallback } from 'react'
 
-import useDefiGold from './useStake'
-import { useWallet } from '../views/Claims/node_modules/use-wallet'
+import useDefiGold from './useDefiGold'
+import { useWallet } from 'use-wallet'
 
-import { harvest, getMiningManagerContract } from '../defigold/utils'
+import { harvest, getMiningManagerContract } from '../dgld/utils'
 
 const useReward = (pid: number) => {
   const { account } = useWallet()
-  const defiGold = useDefiGold()
-  const miningManagerContract = getMiningManagerContract(defiGold)
+  const dgld = useDefiGold()
+  const miningManagerContract = getMiningManagerContract(dgld)
 
   const handleReward = useCallback(async () => {
     const txHash = await harvest(miningManagerContract, pid, account)
     console.log(txHash)
     return txHash
-  }, [account, pid, defiGold])
+  }, [account, pid, dgld])
 
   return { onReward: handleReward }
 }

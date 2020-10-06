@@ -1,17 +1,17 @@
-import React, { useCallback, useEffect, useState } from './views/Claims/node_modules/react'
-import { BrowserRouter as Router, Route, Switch } from './views/Claims/node_modules/react-router-dom'
-import { ThemeProvider } from './views/Claims/components/node_modules/styled-components'
-import { UseWalletProvider } from './views/Claims/node_modules/use-wallet'
+import React, { useCallback, useEffect, useState } from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
+import { UseWalletProvider } from 'use-wallet'
 import DisclaimerModal from './components/DisclaimerModal'
 import MobileMenu from './components/MobileMenu'
 import TopBar from './components/TopBar'
-import ClaimsProvider from './contexts/Claims'
+import FarmsProvider from './contexts/Farms'
 import ModalsProvider from './contexts/Modals'
 import TransactionProvider from './contexts/Transactions'
 import DefiGoldProvider from './contexts/DefiGoldProvider'
 import useModal from './hooks/useModal'
 import theme from './theme'
-import Claims from './views/Claims'
+import Farms from './views/Farms'
 import Home from './views/Home'
 import Stake from './views/Stake'
 
@@ -35,8 +35,8 @@ const App: React.FC = () => {
           <Route path="/" exact>
             <Home />
           </Route>
-          <Route path="/claims">
-            <Claims />
+          <Route path="/farms">
+            <Farms />
           </Route>
           <Route path="/staking">
             <Stake />
@@ -59,9 +59,9 @@ const Providers: React.FC = ({ children }) => {
       >
         <DefiGoldProvider>
           <TransactionProvider>
-            <ClaimsProvider>
+            <FarmsProvider>
               <ModalsProvider>{children}</ModalsProvider>
-            </ClaimsProvider>
+            </FarmsProvider>
           </TransactionProvider>
         </DefiGoldProvider>
       </UseWalletProvider>

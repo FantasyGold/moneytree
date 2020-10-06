@@ -1,5 +1,5 @@
-import React from '../../views/Claims/node_modules/react'
-import styled, { keyframes } from '../../views/Claims/components/node_modules/styled-components'
+import React from 'react'
+import styled, { keyframes } from 'styled-components'
 
 import CardIcon from '../CardIcon'
 

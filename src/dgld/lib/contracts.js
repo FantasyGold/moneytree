@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js/bignumber'
 import ERC20Abi from './abi/erc20.json'
 import MiningManagerAbi from './abi/miningmanager.json'
-import DefiGoldAbi from './abi/defiGold.json'
+import DefiGoldAbi from './abi/dgld.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import WETHAbi from './abi/weth.json'
 import {
@@ -21,7 +21,7 @@ export class Contracts {
     this.defaultGas = options.defaultGas
     this.defaultGasPrice = options.defaultGasPrice
 
-    this.defiGold = new this.web3.eth.Contract(DefiGoldAbi)
+    this.dgld = new this.web3.eth.Contract(DefiGoldAbi)
     this.miningManager = new this.web3.eth.Contract(MiningManagerAbi)
     this.weth = new this.web3.eth.Contract(WETHAbi)
 
@@ -45,7 +45,7 @@ export class Contracts {
       else console.error('Contract address not found in network', networkId)
     }
 
-    setProvider(this.defiGold, contractAddresses.defiGold[networkId])
+    setProvider(this.dgld, contractAddresses.dgld[networkId])
     setProvider(this.miningManager, contractAddresses.miningManager[networkId])
     setProvider(this.weth, contractAddresses.weth[networkId])
 
@@ -58,7 +58,7 @@ export class Contracts {
   }
 
   setDefaultAccount(account) {
-    this.defiGold.options.from = account
+    this.dgld.options.from = account
     this.miningManager.options.from = account
   }
 

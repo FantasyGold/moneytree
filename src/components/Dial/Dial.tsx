@@ -1,5 +1,5 @@
-import React, { useContext } from '../../views/Claims/node_modules/react'
-import styled, { ThemeContext } from '../../views/Claims/components/node_modules/styled-components'
+import React, { useContext } from 'react'
+import styled, { ThemeContext } from 'styled-components'
 
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
 

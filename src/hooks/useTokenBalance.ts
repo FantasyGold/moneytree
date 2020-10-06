@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from '../views/Claims/node_modules/react'
+import { useCallback, useEffect, useState } from 'react'
 
-import BigNumber from '../defigold/node_modules/bignumber.js.js'
-import { useWallet } from '../views/Claims/node_modules/use-wallet'
-import { provider } from '../views/Dig/node_modules/web3-core'
+import BigNumber from 'bignumber.js'
+import { useWallet } from 'use-wallet'
+import { provider } from 'web3-core'
 
 import { getBalance } from '../utils/erc20'
 import useBlock from './useBlock'

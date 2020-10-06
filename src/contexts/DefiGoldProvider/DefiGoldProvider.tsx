@@ -1,36 +1,36 @@
-import React, { createContext, useEffect, useState } from '../../views/Claims/node_modules/react'
+import React, { createContext, useEffect, useState } from 'react'
 
-import { useWallet } from '../../views/Claims/node_modules/use-wallet'
+import { useWallet } from 'use-wallet'
 
-import { DefiGold } from '../../defigold'
+import { DefiGold } from '../../dgld'
 
 export interface DefiGoldContext {
-  defiGold?: typeof DefiGold
+  dgld?: typeof DefiGold
 }
 
 export const Context = createContext<DefiGoldContext>({
-  defiGold: undefined,
+  dgld: undefined,
 })
 
 declare global {
   interface Window {
-    defiGoldsauce: any
+    dgldsauce: any
   }
 }
 
 const DefiGoldProvider: React.FC = ({ children }) => {
   const { ethereum }: { ethereum: any } = useWallet()
-  const [defiGold, setDefiGold] = useState<any>()
+  const [dgld, setDefiGold] = useState<any>()
 
   // @ts-ignore
-  window.defiGold = defiGold
+  window.dgld = dgld
   // @ts-ignore
   window.eth = ethereum
 
   useEffect(() => {
     if (ethereum) {
       const chainId = Number(ethereum.chainId)
-      const defiGoldLib = new DefiGold(ethereum, chainId, false, {
+      const dgldLib = new DefiGold(ethereum, chainId, false, {
         defaultAccount: ethereum.selectedAddress,
         defaultConfirmations: 1,
         autoGasMultiplier: 1.5,
@@ -40,12 +40,12 @@ const DefiGoldProvider: React.FC = ({ children }) => {
         accounts: [],
         ethereumNodeTimeout: 10000,
       })
-      setDefiGold(defiGoldLib)
-      window.defiGoldsauce = defiGoldLib
+      setDefiGold(dgldLib)
+      window.dgldsauce = dgldLib
     }
   }, [ethereum])
 
-  return <Context.Provider value={{ defiGold }}>{children}</Context.Provider>
+  return <Context.Provider value={{ dgld }}>{children}</Context.Provider>
 }
 
 export default DefiGoldProvider

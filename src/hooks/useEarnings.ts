@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useState } from '../views/Claims/node_modules/react'
-import { provider } from '../views/Dig/node_modules/web3-core'
+import { useCallback, useEffect, useState } from 'react'
+import { provider } from 'web3-core'
 
-import BigNumber from '../defigold/node_modules/bignumber.js.js'
-import { useWallet } from '../views/Claims/node_modules/use-wallet'
+import BigNumber from 'bignumber.js'
+import { useWallet } from 'use-wallet'
 
-import { getEarned, getMiningManagerContract } from '../defigold/utils'
-import useDefiGold from './useStake'
+import { getEarned, getMiningManagerContract } from '../dgld/utils'
+import useDefiGold from './useDefiGold'
 import useBlock from './useBlock'
 
 const useEarnings = (pid: number) => {
@@ -14,20 +14,20 @@ const useEarnings = (pid: number) => {
     account,
     ethereum,
   }: { account: string; ethereum: provider } = useWallet()
-  const defiGold = useDefiGold()
-  const miningManagerContract = getMiningManagerContract(defiGold)
+  const dgld = useDefiGold()
+  const miningManagerContract = getMiningManagerContract(dgld)
   const block = useBlock()
 
   const fetchBalance = useCallback(async () => {
     const balance = await getEarned(miningManagerContract, pid, account)
     setBalance(new BigNumber(balance))
-  }, [account, miningManagerContract, defiGold])
+  }, [account, miningManagerContract, dgld])
 
   useEffect(() => {
-    if (account && miningManagerContract && defiGold) {
+    if (account && miningManagerContract && dgld) {
       fetchBalance()
     }
-  }, [account, block, miningManagerContract, setBalance, defiGold])
+  }, [account, block, miningManagerContract, setBalance, dgld])
 
   return balance
 }

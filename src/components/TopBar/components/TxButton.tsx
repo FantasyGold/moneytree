@@ -1,6 +1,6 @@
-import React from '../../../views/Claims/node_modules/react'
-import styled from '../../../views/Claims/components/node_modules/styled-components'
-import { useWallet } from '../../../views/Claims/node_modules/use-wallet'
+import React from 'react'
+import styled from 'styled-components'
+import { useWallet } from 'use-wallet'
 import usePendingTransactions from '../../../hooks/usePendingTransactions'
 import Button from '../../Button'
 

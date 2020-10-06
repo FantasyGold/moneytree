@@ -1,4 +1,4 @@
-import React from './views/Claims/node_modules/react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import './index.css'

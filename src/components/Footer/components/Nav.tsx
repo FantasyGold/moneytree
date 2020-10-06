@@ -1,18 +1,18 @@
-import React from '../../../views/Claims/node_modules/react'
-import styled from '../../../views/Claims/components/node_modules/styled-components'
+import React from 'react'
+import styled from 'styled-components'
 
 const Nav: React.FC = () => {
   return (
     <StyledNav>
       <StyledLink
         target="_blank"
-        href="https://etherscan.io/address/0xc2edad668740f1aa35e4d8f227fb8e17dca888cd#code" //TODO
+        href="https://etherscan.io/address/0xc2edad668740f1aa35e4d8f227fb8e17dca888cd#code"
       >
         MiningManager Contract
       </StyledLink>
       <StyledLink
         target="_blank"
-        href="https://uniswap.info/pair/0xce84867c3c02b05dc570d0135103d3fb9cc19433" //TODO 
+        href="https://uniswap.info/pair/0xce84867c3c02b05dc570d0135103d3fb9cc19433"
       >
         Uniswap DGLD-ETH
       </StyledLink>

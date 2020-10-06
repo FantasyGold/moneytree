@@ -3,13 +3,13 @@
     "inputs": [
       {
         "internalType": "contract DefiGoldToken",
-        "name": "_defiGold",
+        "name": "_dgld",
         "type": "address"
       },
       { "internalType": "address", "name": "_devaddr", "type": "address" },
       {
         "internalType": "uint256",
-        "name": "_defiGoldPerBlock",
+        "name": "_dgldPerBlock",
         "type": "uint256"
       },
       { "internalType": "uint256", "name": "_startBlock", "type": "uint256" },
@@ -207,7 +207,7 @@
   },
   {
     "inputs": [],
-    "name": "defiGold",
+    "name": "dgld",
     "outputs": [
       { "internalType": "contract DefiGoldToken", "name": "", "type": "address" }
     ],
@@ -216,7 +216,7 @@
   },
   {
     "inputs": [],
-    "name": "defiGoldPerBlock",
+    "name": "dgldPerBlock",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"

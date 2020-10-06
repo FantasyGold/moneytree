@@ -1,4 +1,4 @@
-import { createContext } from '../../views/Claims/node_modules/react'
+import { createContext } from 'react'
 import { Transaction, TransactionsMap } from './types'
 
 interface TransactionsContext {

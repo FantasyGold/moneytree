@@ -1,5 +1,5 @@
-import React, { createContext, useCallback, useState } from '../../views/Claims/node_modules/react'
-import styled from '../../views/Claims/components/node_modules/styled-components'
+import React, { createContext, useCallback, useState } from 'react'
+import styled from 'styled-components'
 
 interface ModalsContext {
   content?: React.ReactNode,

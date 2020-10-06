@@ -6,5 +6,5 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
-export { DefiGold } from './DefiGold.js.js'
+export { DefiGold } from './DefiGold.js'
 export { Web3, BigNumber }

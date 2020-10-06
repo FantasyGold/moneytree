@@ -1,6 +1,6 @@
-import React from '../../views/Claims/node_modules/react'
-import { Link } from '../../views/Claims/node_modules/react-router-dom'
-import styled from '../../views/Claims/components/node_modules/styled-components'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
 
 interface IconButtonProps {
   children?: React.ReactNode

@@ -1,5 +1,5 @@
-import React, { useContext, useMemo } from '../../views/Claims/node_modules/react'
-import styled, { ThemeContext } from '../../views/Claims/components/node_modules/styled-components'
+import React, { useContext, useMemo } from 'react'
+import styled, { ThemeContext } from 'styled-components'
 
 type SeparatorOrientation = 'horizontal' | 'vertical'
 

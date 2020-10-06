@@ -13,26 +13,26 @@ const GAS_LIMIT = {
   },
 }
 
-export const getMiningManagerAddress = (defiGold) => {
-  return defiGold && defiGold.miningManagerAddress
+export const getMiningManagerAddress = (dgld) => {
+  return dgld && dgld.miningManagerAddress
 }
-export const getDefiGoldAddress = (defiGold) => {
-  return defiGold && defiGold.defiGoldAddress
+export const getDefiGoldAddress = (dgld) => {
+  return dgld && dgld.dgldAddress
 }
-export const getWethContract = (defiGold) => {
-  return defiGold && defiGold.contracts && defiGold.contracts.weth
-}
-
-export const getMiningManagerContract = (defiGold) => {
-  return defiGold && defiGold.contracts && defiGold.contracts.miningManager
-}
-export const getDefiGoldContract = (defiGold) => {
-  return defiGold && defiGold.contracts && defiGold.contracts.defiGold
+export const getWethContract = (dgld) => {
+  return dgld && dgld.contracts && dgld.contracts.weth
 }
 
-export const getClaims = (defiGold) => {
-  return defiGold
-    ? defiGold.contracts.pools.map(
+export const getMiningManagerContract = (dgld) => {
+  return dgld && dgld.contracts && dgld.contracts.miningManager
+}
+export const getDefiGoldContract = (dgld) => {
+  return dgld && dgld.contracts && dgld.contracts.dgld
+}
+
+export const getFarms = (dgld) => {
+  return dgld
+    ? dgld.contracts.pools.map(
         ({
           pid,
           name,
@@ -53,8 +53,8 @@ export const getClaims = (defiGold) => {
           tokenAddress,
           tokenSymbol,
           tokenContract,
-          earnToken: 'defiGold',
-          earnTokenAddress: defiGold.contracts.defiGold.options.address,
+          earnToken: 'dgld',
+          earnTokenAddress: dgld.contracts.dgld.options.address,
           icon,
         }),
       )
@@ -122,8 +122,8 @@ export const approve = async (lpContract, miningManagerContract, account) => {
     .send({ from: account })
 }
 
-export const getDefiGoldSupply = async (defiGold) => {
-  return new BigNumber(await defiGold.contracts.defiGold.methods.totalSupply().call())
+export const getDefiGoldSupply = async (dgld) => {
+  return new BigNumber(await dgld.contracts.dgld.methods.totalSupply().call())
 }
 
 export const stake = async (miningManagerContract, pid, amount, account) => {

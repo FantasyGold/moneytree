@@ -1,25 +1,25 @@
 import { useCallback } from 'react'
 
-import useDefiGold from './useStake'
+import useDefiGold from './useDefiGold'
 import { useWallet } from 'use-wallet'
 
-import { stake, getMiningManagerContract } from '../defigold/utils'
+import { stake, getMiningManagerContract } from '../dgld/utils'
 
 const useStake = (pid: number) => {
   const { account } = useWallet()
-  const defiGold = useDefiGold()
+  const dgld = useDefiGold()
 
   const handleStake = useCallback(
     async (amount: string) => {
       const txHash = await stake(
-        getMiningManagerContract(defiGold),
+        getMiningManagerContract(dgld),
         pid,
         amount,
         account,
       )
       console.log(txHash)
     },
-    [account, pid, defiGold],
+    [account, pid, dgld],
   )
 
   return { onStake: handleStake }

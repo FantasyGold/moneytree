@@ -1,8 +1,8 @@
-import { useContext } from '../views/Claims/node_modules/react'
-import { Context as ClaimsContext } from '../contexts/Claims'
+import { useContext } from 'react'
+import { Context as FarmsContext } from '../contexts/Farms'
 
 const useUnharvested = () => {
-  const { unharvested } = useContext(ClaimsContext)
+  const { unharvested } = useContext(FarmsContext)
   return unharvested
 }
 

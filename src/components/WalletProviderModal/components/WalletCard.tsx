@@ -1,4 +1,4 @@
-import React from '../../../views/Claims/node_modules/react'
+import React from 'react'
 import Button from '../../Button'
 import Card from '../../Card'
 import CardContent from '../../CardContent'

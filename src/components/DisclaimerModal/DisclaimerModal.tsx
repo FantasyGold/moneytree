@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useMemo } from '../../views/Claims/node_modules/react'
+import React, { useCallback, useState, useMemo } from 'react'
 
 import Button from '../Button'
 import CardIcon from '../CardIcon'

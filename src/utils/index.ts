@@ -1,4 +1,4 @@
-import BigNumber from '../defigold/node_modules/bignumber.js.js'
+import BigNumber from 'bignumber.js'
 
 export { default as formatAddress } from './formatAddress'
 

@@ -1,19 +1,19 @@
-import { useCallback, useEffect, useState } from '../views/Claims/node_modules/react'
+import { useCallback, useEffect, useState } from 'react'
 
-import BigNumber from '../defigold/node_modules/bignumber.js.js'
-import useDefiGold from './useStake'
-import { useWallet } from '../views/Claims/node_modules/use-wallet'
-import { provider } from '../views/Dig/node_modules/web3-core'
-import { Contract } from '../views/Dig/components/node_modules/web3-eth-contract'
+import BigNumber from 'bignumber.js'
+import useDefiGold from './useDefiGold'
+import { useWallet } from 'use-wallet'
+import { provider } from 'web3-core'
+import { Contract } from 'web3-eth-contract'
 
 import { getAllowance } from '../utils/erc20'
-import { getMiningManagerContract } from '../defigold/utils'
+import { getMiningManagerContract } from '../dgld/utils'
 
 const useAllowance = (lpContract: Contract) => {
   const [allowance, setAllowance] = useState(new BigNumber(0))
   const { account }: { account: string; ethereum: provider } = useWallet()
-  const defiGold = useDefiGold()
-  const miningManagerContract = getMiningManagerContract(defiGold)
+  const dgld = useDefiGold()
+  const miningManagerContract = getMiningManagerContract(dgld)
 
   const fetchAllowance = useCallback(async () => {
     const allowance = await getAllowance(

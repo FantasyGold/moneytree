@@ -1,16 +1,16 @@
-import { useCallback } from '../views/Claims/node_modules/react'
+import { useCallback } from 'react'
 
-import useDefiGold from './useStake'
-import { useWallet } from '../views/Claims/node_modules/use-wallet'
-import { provider } from '../views/Dig/node_modules/web3-core'
-import { Contract } from '../views/Dig/components/node_modules/web3-eth-contract'
+import useDefiGold from './useDefiGold'
+import { useWallet } from 'use-wallet'
+import { provider } from 'web3-core'
+import { Contract } from 'web3-eth-contract'
 
-import { approve, getMiningManagerContract } from '../defigold/utils'
+import { approve, getMiningManagerContract } from '../dgld/utils'
 
 const useApprove = (lpContract: Contract) => {
   const { account }: { account: string; ethereum: provider } = useWallet()
-  const defiGold = useDefiGold()
-  const miningManagerContract = getMiningManagerContract(defiGold)
+  const dgld = useDefiGold()
+  const miningManagerContract = getMiningManagerContract(dgld)
 
   const handleApprove = useCallback(async () => {
     try {

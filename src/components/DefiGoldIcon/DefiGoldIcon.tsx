@@ -1,4 +1,4 @@
-import React from '../../views/Claims/node_modules/react'
+import React from 'react'
 
 interface DefiGoldIconProps {
   size?: number
@@ -15,7 +15,7 @@ const DefiGoldIcon: React.FC<DefiGoldIconProps> = ({ size = 36, v1, v2, v3 }) =>
       filter: v1 ? 'saturate(0.5)' : undefined,
     }}
   >
-    🍣
+    💰
   </span>
 )
 

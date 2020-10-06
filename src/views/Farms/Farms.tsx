@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { useWallet } from 'use-wallet'
 
-import manager from '../../assets/img/manager.png'
+import chef from '../../assets/img/chef.png'
 
 import Button from '../../components/Button'
 import Page from '../../components/Page'
@@ -11,11 +11,11 @@ import WalletProviderModal from '../../components/WalletProviderModal'
 
 import useModal from '../../hooks/useModal'
 
-import Dig from '../Dig'
+import Farm from '../Farm'
 
-import ClaimCards from './components/ClaimCards'
+import FarmCards from './components/FarmCards'
 
-const Claims: React.FC = () => {
+const Farms: React.FC = () => {
   const { path } = useRouteMatch()
   const { account } = useWallet()
   const [onPresentWalletProviderModal] = useModal(<WalletProviderModal />)
@@ -26,14 +26,14 @@ const Claims: React.FC = () => {
           <>
             <Route exact path={path}>
               <PageHeader
-                icon={<img src={manager} height="120" />}
-                subtitle="Earn DefiGold tokens by staking Uniswap V2 LP Tokens."
-                title="Find a Lucky Mining Claim"
+                icon={<img src={chef} height="120" />}
+                subtitle="Earn DGLD tokens by staking Uniswap V2 LP Tokens."
+                title="Select Your Favorite Dishes"
               />
-              <ClaimCards />
+              <FarmCards />
             </Route>
-            <Route path={`${path}/:digId`}>
-              <Dig />
+            <Route path={`${path}/:farmId`}>
+              <Farm />
             </Route>
           </>
         ) : (
@@ -56,4 +56,4 @@ const Claims: React.FC = () => {
   )
 }
 
-export default Claims
+export default Farms

@@ -1,5 +1,5 @@
-import BigNumber from '../../../defigold/node_modules/bignumber.js.js'
-import React, { useCallback, useMemo, useState } from '../../Claims/node_modules/react'
+import BigNumber from 'bignumber.js'
+import React, { useCallback, useMemo, useState } from 'react'
 import Button from '../../../components/Button'
 import Modal, { ModalProps } from '../../../components/Modal'
 import ModalActions from '../../../components/ModalActions'

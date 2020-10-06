@@ -1,8 +1,8 @@
-import BigNumber from '../../../defigold/node_modules/bignumber.js.js'
-import React, { useEffect, useState } from '../../Claims/node_modules/react'
+import BigNumber from 'bignumber.js'
+import React, { useEffect, useState } from 'react'
 import CountUp from 'react-countup'
-import styled from '../../Claims/components/node_modules/styled-components'
-import { useWallet } from '../../Claims/node_modules/use-wallet'
+import styled from 'styled-components'
+import { useWallet } from 'use-wallet'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
 import Label from '../../../components/Label'
@@ -11,10 +11,10 @@ import Value from '../../../components/Value'
 import DefiGoldIcon from '../../../components/DefiGoldIcon'
 import useAllEarnings from '../../../hooks/useAllEarnings'
 import useAllStakedValue from '../../../hooks/useAllStakedValue'
-import useClaims from '../../../hooks/useClaims'
+import useFarms from '../../../hooks/useFarms'
 import useTokenBalance from '../../../hooks/useTokenBalance'
-import useDefiGold from '../../../hooks/useStake'
-import { getDefiGoldAddress, getDefiGoldSupply } from '../../../defigold/utils'
+import useDefiGold from '../../../hooks/useDefiGold'
+import { getDefiGoldAddress, getDefiGoldSupply } from '../../../dgld/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 
 const PendingRewards: React.FC = () => {
@@ -30,11 +30,11 @@ const PendingRewards: React.FC = () => {
       .toNumber()
   }
 
-  const [claims] = useClaims()
+  const [farms] = useFarms()
   const allStakedValue = useAllStakedValue()
 
   if (allStakedValue && allStakedValue.length) {
-    const sumWeth = claims.reduce(
+    const sumWeth = farms.reduce(
       (c, { id }, i) => c + (allStakedValue[i].totalWethValue.toNumber() || 0),
       0,
     )
@@ -71,19 +71,19 @@ const PendingRewards: React.FC = () => {
 
 const Balances: React.FC = () => {
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
-  const defiGold = useDefiGold()
-  const defiGoldBalance = useTokenBalance(getDefiGoldAddress(defiGold))
+  const dgld = useDefiGold()
+  const dgldBalance = useTokenBalance(getDefiGoldAddress(dgld))
   const { account, ethereum }: { account: any; ethereum: any } = useWallet()
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const supply = await getDefiGoldSupply(defiGold)
+      const supply = await getDefiGoldSupply(dgld)
       setTotalSupply(supply)
     }
-    if (defiGold) {
+    if (dgld) {
       fetchTotalSupply()
     }
-  }, [defiGold, setTotalSupply])
+  }, [dgld, setTotalSupply])
 
   return (
     <StyledWrapper>
@@ -96,7 +96,7 @@ const Balances: React.FC = () => {
               <div style={{ flex: 1 }}>
                 <Label text="Your DGLD Balance" />
                 <Value
-                  value={!!account ? getBalanceNumber(defiGoldBalance) : 'Locked'}
+                  value={!!account ? getBalanceNumber(dgldBalance) : 'Locked'}
                 />
               </div>
             </StyledBalance>

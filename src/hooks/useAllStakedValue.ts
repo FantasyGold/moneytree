@@ -1,17 +1,17 @@
-import { useCallback, useEffect, useState } from '../views/Claims/node_modules/react'
-import { provider } from '../views/Dig/node_modules/web3-core'
+import { useCallback, useEffect, useState } from 'react'
+import { provider } from 'web3-core'
 
-import BigNumber from '../defigold/node_modules/bignumber.js.js'
-import { useWallet } from '../views/Claims/node_modules/use-wallet'
-import { Contract } from '../views/Dig/components/node_modules/web3-eth-contract'
+import BigNumber from 'bignumber.js'
+import { useWallet } from 'use-wallet'
+import { Contract } from 'web3-eth-contract'
 
 import {
   getMiningManagerContract,
   getWethContract,
-  getClaims,
+  getFarms,
   getTotalLPWethValue,
-} from '../defigold/utils'
-import useDefiGold from './useStake'
+} from '../dgld/utils'
+import useDefiGold from './useDefiGold'
 import useBlock from './useBlock'
 
 export interface StakedValue {
@@ -25,15 +25,15 @@ export interface StakedValue {
 const useAllStakedValue = () => {
   const [balances, setBalance] = useState([] as Array<StakedValue>)
   const { account }: { account: string; ethereum: provider } = useWallet()
-  const defiGold = useDefiGold()
-  const claims = getClaims(defiGold)
-  const miningManagerContract = getMiningManagerContract(defiGold)
-  const wethContact = getWethContract(defiGold)
+  const dgld = useDefiGold()
+  const farms = getFarms(dgld)
+  const miningManagerContract = getMiningManagerContract(dgld)
+  const wethContact = getWethContract(dgld)
   const block = useBlock()
 
   const fetchAllStakedValue = useCallback(async () => {
     const balances: Array<StakedValue> = await Promise.all(
-      claims.map(
+      farms.map(
         ({
           pid,
           lpContract,
@@ -54,13 +54,13 @@ const useAllStakedValue = () => {
     )
 
     setBalance(balances)
-  }, [account, miningManagerContract, defiGold])
+  }, [account, miningManagerContract, dgld])
 
   useEffect(() => {
-    if (account && miningManagerContract && defiGold) {
+    if (account && miningManagerContract && dgld) {
       fetchAllStakedValue()
     }
-  }, [account, block, miningManagerContract, setBalance, defiGold])
+  }, [account, block, miningManagerContract, setBalance, dgld])
 
   return balances
 }

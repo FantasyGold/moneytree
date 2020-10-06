@@ -1,7 +1,7 @@
-import React from '../../views/Claims/node_modules/react'
-import styled, { keyframes } from '../../views/Claims/components/node_modules/styled-components'
+import React from 'react'
+import styled, { keyframes } from 'styled-components'
 
-import { NavLink } from '../../views/Claims/node_modules/react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 interface MobileMenuProps {
   onDismiss: () => void
@@ -20,10 +20,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
           <StyledLink
             exact
             activeClassName="active"
-            to="/claims"
+            to="/farms"
             onClick={onDismiss}
           >
-            Claims
+            Farms
           </StyledLink>
           <StyledLink
             exact

@@ -1,4 +1,4 @@
-import BigNumber from '../../../defigold/node_modules/bignumber.js.js'
+import BigNumber from 'bignumber.js'
 import React, { useEffect, useState } from 'react'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import styled, { keyframes } from 'styled-components'
@@ -9,25 +9,25 @@ import CardContent from '../../../components/CardContent'
 import CardIcon from '../../../components/CardIcon'
 import Loader from '../../../components/Loader'
 import Spacer from '../../../components/Spacer'
-import { Dig } from '../../../contexts/Claims'
+import { Farm } from '../../../contexts/Farms'
 import useAllStakedValue, {
   StakedValue,
 } from '../../../hooks/useAllStakedValue'
-import useClaims from '../../../hooks/useClaims'
-import useDefiGold from '../../../hooks/useStake'
-import { getEarned, getMiningManagerContract } from '../../../defigold/utils'
+import useFarms from '../../../hooks/useFarms'
+import useDefiGold from '../../../hooks/useDefiGold'
+import { getEarned, getMiningManagerContract } from '../../../dgld/utils'
 import { bnToDec } from '../../../utils'
 
-interface DigWithStakedValue extends Dig, StakedValue {
+interface FarmWithStakedValue extends Farm, StakedValue {
   apy: BigNumber
 }
 
-const ClaimCards: React.FC = () => {
-  const [claims] = useClaims()
+const FarmCards: React.FC = () => {
+  const [farms] = useFarms()
   const { account } = useWallet()
   const stakedValue = useAllStakedValue()
 
-  const dgldIndex = claims.findIndex(
+  const dgldIndex = farms.findIndex(
     ({ tokenSymbol }) => tokenSymbol === 'DGLD',
   )
 
@@ -39,10 +39,10 @@ const ClaimCards: React.FC = () => {
   const BLOCKS_PER_YEAR = new BigNumber(2336000)
   const DGLD_PER_BLOCK = new BigNumber(1000)
 
-  const rows = claims.reduce<DigWithStakedValue[][]>(
-    (digRows, dig, i) => {
-      const digWithStakedValue = {
-        ...dig,
+  const rows = farms.reduce<FarmWithStakedValue[][]>(
+    (farmRows, farm, i) => {
+      const farmWithStakedValue = {
+        ...farm,
         ...stakedValue[i],
         apy: stakedValue[i]
           ? dgldPrice
@@ -52,13 +52,13 @@ const ClaimCards: React.FC = () => {
               .div(stakedValue[i].totalWethValue)
           : null,
       }
-      const newDigRows = [...digRows]
-      if (newDigRows[newDigRows.length - 1].length === 3) {
-        newDigRows.push([digWithStakedValue])
+      const newFarmRows = [...farmRows]
+      if (newFarmRows[newFarmRows.length - 1].length === 3) {
+        newFarmRows.push([farmWithStakedValue])
       } else {
-        newDigRows[newDigRows.length - 1].push(digWithStakedValue)
+        newFarmRows[newFarmRows.length - 1].push(farmWithStakedValue)
       }
-      return newDigRows
+      return newFarmRows
     },
     [[]],
   )
@@ -66,11 +66,11 @@ const ClaimCards: React.FC = () => {
   return (
     <StyledCards>
       {!!rows[0].length ? (
-        rows.map((digRow, i) => (
+        rows.map((farmRow, i) => (
           <StyledRow key={i}>
-            {digRow.map((dig, j) => (
+            {farmRow.map((farm, j) => (
               <React.Fragment key={j}>
-                <DigCard dig={dig} />
+                <FarmCard farm={farm} />
                 {(j === 0 || j === 1) && <StyledSpacer />}
               </React.Fragment>
             ))}
@@ -85,17 +85,17 @@ const ClaimCards: React.FC = () => {
   )
 }
 
-interface DigCardProps {
-  dig: DigWithStakedValue
+interface FarmCardProps {
+  farm: FarmWithStakedValue
 }
 
-const DigCard: React.FC<DigCardProps> = ({ dig }) => {
+const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   const [startTime, setStartTime] = useState(0)
   const [harvestable, setHarvestable] = useState(0)
 
   const { account } = useWallet()
-  const { lpTokenAddress } = dig
-  const defiGold = useDefiGold()
+  const { lpTokenAddress } = farm
+  const dgld = useDefiGold()
 
   const renderer = (countdownProps: CountdownRenderProps) => {
     const { hours, minutes, seconds } = countdownProps
@@ -111,38 +111,38 @@ const DigCard: React.FC<DigCardProps> = ({ dig }) => {
 
   useEffect(() => {
     async function fetchEarned() {
-      if (defiGold) return
+      if (dgld) return
       const earned = await getEarned(
-        getMiningManagerContract(defiGold),
+        getMiningManagerContract(dgld),
         lpTokenAddress,
         account,
       )
       setHarvestable(bnToDec(earned))
     }
-    if (defiGold && account) {
+    if (dgld && account) {
       fetchEarned()
     }
-  }, [defiGold, lpTokenAddress, account, setHarvestable])
+  }, [dgld, lpTokenAddress, account, setHarvestable])
 
   const poolActive = true // startTime * 1000 - Date.now() <= 0
 
   return (
     <StyledCardWrapper>
-      {dig.tokenSymbol === 'DGLD' && <StyledCardAccent />}
+      {farm.tokenSymbol === 'DGLD' && <StyledCardAccent />}
       <Card>
         <CardContent>
           <StyledContent>
-            <CardIcon>{dig.icon}</CardIcon>
-            <StyledTitle>{dig.name}</StyledTitle>
+            <CardIcon>{farm.icon}</CardIcon>
+            <StyledTitle>{farm.name}</StyledTitle>
             <StyledDetails>
-              <StyledDetail>Deposit {dig.lpToken.toUpperCase()}</StyledDetail>
-              <StyledDetail>Earn {dig.earnToken.toUpperCase()}</StyledDetail>
+              <StyledDetail>Deposit {farm.lpToken.toUpperCase()}</StyledDetail>
+              <StyledDetail>Earn {farm.earnToken.toUpperCase()}</StyledDetail>
             </StyledDetails>
             <Spacer />
             <Button
               disabled={!poolActive}
               text={poolActive ? 'Select' : undefined}
-              to={`/claims/${dig.id}`}
+              to={`/farms/${farm.id}`}
             >
               {!poolActive && (
                 <Countdown
@@ -154,8 +154,8 @@ const DigCard: React.FC<DigCardProps> = ({ dig }) => {
             <StyledInsight>
               <span>APY</span>
               <span>
-                {dig.apy
-                  ? `${dig.apy
+                {farm.apy
+                  ? `${farm.apy
                       .times(new BigNumber(100))
                       .toNumber()
                       .toLocaleString('en-US')
@@ -163,14 +163,14 @@ const DigCard: React.FC<DigCardProps> = ({ dig }) => {
                   : 'Loading ...'}
               </span>
               {/* <span>
-                {dig.tokenAmount
-                  ? (dig.tokenAmount.toNumber() || 0).toLocaleString('en-US')
+                {farm.tokenAmount
+                  ? (farm.tokenAmount.toNumber() || 0).toLocaleString('en-US')
                   : '-'}{' '}
-                {dig.tokenSymbol}
+                {farm.tokenSymbol}
               </span>
               <span>
-                {dig.wethAmount
-                  ? (dig.wethAmount.toNumber() || 0).toLocaleString('en-US')
+                {farm.wethAmount
+                  ? (farm.wethAmount.toNumber() || 0).toLocaleString('en-US')
                   : '-'}{' '}
                 ETH
               </span> */}
@@ -297,4 +297,4 @@ const StyledInsight = styled.div`
   padding: 0 12px;
 `
 
-export default ClaimCards
+export default FarmCards

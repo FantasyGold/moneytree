@@ -1,7 +1,7 @@
-import BigNumber from '../../../defigold/node_modules/bignumber.js.js'
-import React, { useCallback, useState } from '../../Claims/node_modules/react'
-import styled from '../../Claims/components/node_modules/styled-components'
-import { Contract } from '../../Dig/components/node_modules/web3-eth-contract'
+import BigNumber from 'bignumber.js'
+import React, { useCallback, useState } from 'react'
+import styled from 'styled-components'
+import { Contract } from 'web3-eth-contract'
 import Button from '../../../components/Button'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
@@ -73,7 +73,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon>👨🏻‍🍳</CardIcon>
+            <CardIcon>⛏️</CardIcon>
             <Value value={getBalanceNumber(stakedBalance)} />
             <Label text={`${tokenName} Tokens Staked`} />
           </StyledCardHeader>

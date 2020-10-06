@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useReducer } from '../../views/Claims/node_modules/react'
+import React, { useCallback, useEffect, useReducer } from 'react'
 
 import Context from './context'
 import reducer, {

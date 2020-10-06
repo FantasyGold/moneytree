@@ -1,6 +1,6 @@
-import React from '../Claims/node_modules/react'
-import styled from '../Claims/components/node_modules/styled-components'
-import manager from '../../assets/img/manager.png'
+import React from 'react'
+import styled from 'styled-components'
+import chef from '../../assets/img/chef.png'
 import Button from '../../components/Button'
 import Container from '../../components/Container'
 import Page from '../../components/Page'
@@ -12,9 +12,9 @@ const Home: React.FC = () => {
   return (
     <Page>
       <PageHeader
-        icon={<img src={manager} height={120} />}
-        title="MiningManager is Ready"
-        subtitle="Stake Uniswap LP tokens to claim your DefiGold!"
+        icon={<img src={chef} height={120} />}
+        title="DefiGold Protocol is Ready"
+        subtitle="Stake Uniswap LP tokens to earn DGLD!"
       />
 
       <Container>
@@ -31,7 +31,7 @@ const Home: React.FC = () => {
           margin: '0 auto',
         }}
       >
-        <Button text="See the Mining Claims" to="/claims" variant="secondary" />
+        <Button text="See the Menu" to="/farms" variant="secondary" />
       </div>
     </Page>
   )

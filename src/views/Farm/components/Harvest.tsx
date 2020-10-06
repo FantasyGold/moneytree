@@ -1,5 +1,5 @@
-import React, { useState } from '../../Claims/node_modules/react'
-import styled from '../../Claims/components/node_modules/styled-components'
+import React, { useState } from 'react'
+import styled from 'styled-components'
 import Button from '../../../components/Button'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
@@ -24,14 +24,14 @@ const Harvest: React.FC<HarvestProps> = ({ pid }) => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon>🍣</CardIcon>
+            <CardIcon>💰</CardIcon>
             <Value value={getBalanceNumber(earnings)} />
-            <Label text="DefiGold Earned" />
+            <Label text="DGLD Earned" />
           </StyledCardHeader>
           <StyledCardActions>
             <Button
               disabled={!earnings.toNumber() || pendingTx}
-              text={pendingTx ? 'Collecting DefiGold' : 'Harvest'}
+              text={pendingTx ? 'Collecting DGLD' : 'Harvest'}
               onClick={async () => {
                 setPendingTx(true)
                 await onReward()

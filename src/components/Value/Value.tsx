@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from '../../views/Claims/node_modules/react'
+import React, { useState, useEffect } from 'react'
 import CountUp from 'react-countup'
 
-import styled from '../../views/Claims/components/node_modules/styled-components'
+import styled from 'styled-components'
 
 interface ValueProps {
   value: string | number

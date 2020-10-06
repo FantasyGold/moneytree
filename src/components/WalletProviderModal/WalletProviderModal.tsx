@@ -1,6 +1,6 @@
-import React, { useEffect } from '../../views/Claims/node_modules/react'
-import styled from '../../views/Claims/components/node_modules/styled-components'
-import { useWallet } from '../../views/Claims/node_modules/use-wallet'
+import React, { useEffect } from 'react'
+import styled from 'styled-components'
+import { useWallet } from 'use-wallet'
 
 import metamaskLogo from '../../assets/img/metamask-fox.svg'
 import walletConnectLogo from '../../assets/img/wallet-connect.svg'
