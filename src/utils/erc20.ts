@@ -14,13 +14,13 @@ export const getContract = (provider: provider, address: string) => {
 }
 
 export const getAllowance = async (
-  lpContract: Contract,
-  miningManagerContract: Contract,
-  account: string,
+  contract: Contract,
+  owner: string,
+  spender: string,
 ): Promise<string> => {
   try {
-    const allowance: string = await lpContract.methods
-      .allowance(account, miningManagerContract.options.address)
+    const allowance: string = await contract.methods
+      .allowance(owner, spender)
       .call()
     return allowance
   } catch (e) {

@@ -1,13 +1,13 @@
 import { useCallback } from 'react'
 
-import useDefiGold from './useDefiGold'
+import useDgld from './useDgld'
 import { useWallet } from 'use-wallet'
 
 import { harvest, getMiningManagerContract } from '../dgld/utils'
 
 const useReward = (pid: number) => {
   const { account } = useWallet()
-  const dgld = useDefiGold()
+  const dgld = useDgld()
   const miningManagerContract = getMiningManagerContract(dgld)
 
   const handleReward = useCallback(async () => {

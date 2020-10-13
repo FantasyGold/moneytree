@@ -5,7 +5,7 @@ import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
 
 import { getEarned, getMiningManagerContract } from '../dgld/utils'
-import useDefiGold from './useDefiGold'
+import useDgld from './useDgld'
 import useBlock from './useBlock'
 
 const useEarnings = (pid: number) => {
@@ -14,7 +14,7 @@ const useEarnings = (pid: number) => {
     account,
     ethereum,
   }: { account: string; ethereum: provider } = useWallet()
-  const dgld = useDefiGold()
+  const dgld = useDgld()
   const miningManagerContract = getMiningManagerContract(dgld)
   const block = useBlock()
 

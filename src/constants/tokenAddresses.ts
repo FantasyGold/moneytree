@@ -1,4 +1,4 @@
-export const dgld = '0x0e2298e3b3390e3b945a5456fbf59ecc3f55da16'
-export const dgldv2 = '0xaba8cac6866b83ae4eec97dd07ed254282f6ad8a'
-export const dgldAddress = '0x43a7903E3a839a67192151eE300e11198985E54b'
-export const miningManagerAddress = '0x245A074cA9814fB46A21562bC70fAB92F8A3F779'
+export const dgld = '0x71726f1885Cb696606B56b2f06bedfF898c04a85'
+export const dgldv2 = '0x81922Fd2Fbd22BBD4015cB50d25C2ae1Aa48A8D6'
+export const dgldAddress = '0x75Aed7B23Ac348bf0bA1DCE8a03266ab0866eFCd'
+export const miningManagerAddress = '0xA097713cE5Aa79c93BfC6fCbbfea8FFA89F91244'

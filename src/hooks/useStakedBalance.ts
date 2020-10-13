@@ -4,13 +4,13 @@ import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
 
 import { getStaked, getMiningManagerContract } from '../dgld/utils'
-import useDefiGold from './useDefiGold'
+import useDgld from './useDgld'
 import useBlock from './useBlock'
 
 const useStakedBalance = (pid: number) => {
   const [balance, setBalance] = useState(new BigNumber(0))
   const { account }: { account: string } = useWallet()
-  const dgld = useDefiGold()
+  const dgld = useDgld()
   const miningManagerContract = getMiningManagerContract(dgld)
   const block = useBlock()
 

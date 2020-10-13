@@ -8,12 +8,12 @@ import TopBar from './components/TopBar'
 import FarmsProvider from './contexts/Farms'
 import ModalsProvider from './contexts/Modals'
 import TransactionProvider from './contexts/Transactions'
-import DefiGoldProvider from './contexts/DefiGoldProvider'
+import DgldProvider from './contexts/DgldProvider'
 import useModal from './hooks/useModal'
 import theme from './theme'
 import Farms from './views/Farms'
 import Home from './views/Home'
-import Stake from './views/Stake'
+import Staking from "./views/Staking";
 
 const App: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false)
@@ -39,7 +39,7 @@ const App: React.FC = () => {
             <Farms />
           </Route>
           <Route path="/staking">
-            <Stake />
+            <Staking />
           </Route>
         </Switch>
       </Router>
@@ -52,18 +52,18 @@ const Providers: React.FC = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <UseWalletProvider
-        chainId={1}
+        chainId={3}
         connectors={{
-          walletconnect: { rpcUrl: 'https://mainnet.eth.aragon.network/' },
+          walletconnect: { rpcUrl: 'https://ropsten.eth.aragon.network/' },
         }}
       >
-        <DefiGoldProvider>
+        <DgldProvider>
           <TransactionProvider>
             <FarmsProvider>
               <ModalsProvider>{children}</ModalsProvider>
             </FarmsProvider>
           </TransactionProvider>
-        </DefiGoldProvider>
+        </DgldProvider>
       </UseWalletProvider>
     </ThemeProvider>
   )
@@ -79,7 +79,7 @@ const Disclaimer: React.FC = () => {
   )
 
   useEffect(() => {
-    const seenDisclaimer = true // localStorage.getItem('disclaimer')
+    const seenDisclaimer = false //localStorage.getItem('disclaimer')
     if (!seenDisclaimer) {
       onPresentDisclaimerModal()
     }

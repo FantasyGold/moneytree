@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 
-import useDefiGold from './useDefiGold'
+import useDgld from './useDgld'
 import { useWallet } from 'use-wallet'
 import { provider } from 'web3-core'
 import { Contract } from 'web3-eth-contract'
@@ -9,7 +9,7 @@ import { approve, getMiningManagerContract } from '../dgld/utils'
 
 const useApprove = (lpContract: Contract) => {
   const { account }: { account: string; ethereum: provider } = useWallet()
-  const dgld = useDefiGold()
+  const dgld = useDgld()
   const miningManagerContract = getMiningManagerContract(dgld)
 
   const handleApprove = useCallback(async () => {

@@ -1,56 +1,41 @@
 import BigNumber from 'bignumber.js'
-import React, { useCallback, useState } from 'react'
+import React, {useCallback, useState} from 'react'
 import styled from 'styled-components'
-import { Contract } from 'web3-eth-contract'
 import Button from '../../../components/Button'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
 import CardIcon from '../../../components/CardIcon'
-import IconButton from '../../../components/IconButton'
-import { AddIcon } from '../../../components/icons'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
-import useAllowance from '../../../hooks/useAllowance'
-import useApprove from '../../../hooks/useApprove'
 import useModal from '../../../hooks/useModal'
-import useStake from '../../../hooks/useStake'
-import useStakedBalance from '../../../hooks/useStakedBalance'
 import useTokenBalance from '../../../hooks/useTokenBalance'
-import useUnstake from '../../../hooks/useUnstake'
-import { getBalanceNumber } from '../../../utils/formatBalance'
+import {getBalanceNumber} from '../../../utils/formatBalance'
 import DepositModal from './DepositModal'
-import WithdrawModal from './WithdrawModal'
+import {contractAddresses} from '../../../dgld/lib/constants'
+import useEnter from "../../../hooks/useEnter";
+import useLeave from "../../../hooks/useLeave";
+import useAllowanceStaking from "../../../hooks/useAllowanceStaking";
+import useApproveStaking from "../../../hooks/useApproveStaking";
 
 interface StakeProps {
-  lpContract: Contract
-  pid: number
-  tokenName: string
 }
 
-const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
+const StakeDgld: React.FC<StakeProps> = ({}) => {
+  const tokenName = "DGLD"
   const [requestedApproval, setRequestedApproval] = useState(false)
 
-  const allowance = useAllowance(lpContract)
-  const { onApprove } = useApprove(lpContract)
+  const allowance = useAllowanceStaking()
+  const {onApprove} = useApproveStaking()
 
-  const tokenBalance = useTokenBalance(lpContract.options.address)
-  const stakedBalance = useStakedBalance(pid)
+  const tokenBalance = useTokenBalance(contractAddresses.dgld[3])
 
-  const { onStake } = useStake(pid)
-  const { onUnstake } = useUnstake(pid)
+  const {onEnter} = useEnter()
+  const {onLeave} = useLeave()
 
   const [onPresentDeposit] = useModal(
     <DepositModal
       max={tokenBalance}
-      onConfirm={onStake}
-      tokenName={tokenName}
-    />,
-  )
-
-  const [onPresentWithdraw] = useModal(
-    <WithdrawModal
-      max={stakedBalance}
-      onConfirm={onUnstake}
+      onConfirm={onEnter}
       tokenName={tokenName}
     />,
   )
@@ -73,28 +58,25 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName }) => {
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon>⛏️</CardIcon>
-            <Value value={getBalanceNumber(stakedBalance)} />
-            <Label text={`${tokenName} Tokens Staked`} />
+            <CardIcon>💰</CardIcon>
+            <Value value={getBalanceNumber(tokenBalance)}/>
+            <Label text={`DGLD Tokens Available`}/>
           </StyledCardHeader>
           <StyledCardActions>
             {!allowance.toNumber() ? (
               <Button
                 disabled={requestedApproval}
                 onClick={handleApprove}
-                text={`Approve ${tokenName}`}
+                text={`Approve DGLD`}
               />
             ) : (
               <>
                 <Button
-                  disabled={stakedBalance.eq(new BigNumber(0))}
-                  text="Unstake"
-                  onClick={onPresentWithdraw}
+                  disabled={tokenBalance.eq(new BigNumber(0))}
+                  text="Convert to xDGLD"
+                  onClick={onPresentDeposit}
                 />
-                <StyledActionSpacer />
-                <IconButton onClick={onPresentDeposit}>
-                  <AddIcon />
-                </IconButton>
+                <StyledActionSpacer/>
               </>
             )}
           </StyledCardActions>
@@ -129,4 +111,4 @@ const StyledCardContentInner = styled.div`
   justify-content: space-between;
 `
 
-export default Stake
+export default StakeDgld

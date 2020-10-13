@@ -1,7 +1,8 @@
 import BigNumber from 'bignumber.js/bignumber'
 import ERC20Abi from './abi/erc20.json'
 import MiningManagerAbi from './abi/miningmanager.json'
-import DefiGoldAbi from './abi/dgld.json'
+import XDgldAbi from './abi/XDgld.json'
+import DgldAbi from './abi/dgld.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import WETHAbi from './abi/weth.json'
 import {
@@ -21,8 +22,9 @@ export class Contracts {
     this.defaultGas = options.defaultGas
     this.defaultGasPrice = options.defaultGasPrice
 
-    this.dgld = new this.web3.eth.Contract(DefiGoldAbi)
+    this.dgld = new this.web3.eth.Contract(DgldAbi)
     this.miningManager = new this.web3.eth.Contract(MiningManagerAbi)
+    this.xDgldStaking = new this.web3.eth.Contract(XDgldAbi)
     this.weth = new this.web3.eth.Contract(WETHAbi)
 
     this.pools = supportedPools.map((pool) =>
@@ -47,6 +49,7 @@ export class Contracts {
 
     setProvider(this.dgld, contractAddresses.dgld[networkId])
     setProvider(this.miningManager, contractAddresses.miningManager[networkId])
+    setProvider(this.xDgldStaking, contractAddresses.xDgld[networkId])
     setProvider(this.weth, contractAddresses.weth[networkId])
 
     this.pools.forEach(

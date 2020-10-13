@@ -2,7 +2,7 @@
   {
     "inputs": [
       {
-        "internalType": "contract DefiGoldToken",
+        "internalType": "contract DgldToken",
         "name": "_dgld",
         "type": "address"
       },
@@ -144,7 +144,7 @@
       { "internalType": "uint256", "name": "_pid", "type": "uint256" },
       { "internalType": "address", "name": "_user", "type": "address" }
     ],
-    "name": "pendingDefiGold",
+    "name": "pendingDgld",
     "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
@@ -166,7 +166,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "accDefiGoldPerShare",
+        "name": "accDgldPerShare",
         "type": "uint256"
       }
     ],
@@ -209,7 +209,7 @@
     "inputs": [],
     "name": "dgld",
     "outputs": [
-      { "internalType": "contract DefiGoldToken", "name": "", "type": "address" }
+      { "internalType": "contract DgldToken", "name": "", "type": "address" }
     ],
     "stateMutability": "view",
     "type": "function"

@@ -2,8 +2,8 @@ import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { useWallet } from 'use-wallet'
 import useTokenBalance from '../../../hooks/useTokenBalance'
-import useDefiGold from '../../../hooks/useDefiGold'
-import { getDefiGoldAddress } from '../../../dgld/utils'
+import useDgld from '../../../hooks/useDgld'
+import { getDgldAddress } from '../../../dgld/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import Button from '../../Button'
 import CardIcon from '../../CardIcon'
@@ -23,8 +23,8 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
     reset()
   }, [onDismiss, reset])
 
-  const dgld = useDefiGold()
-  const dgldBalance = useTokenBalance(getDefiGoldAddress(dgld))
+  const dgld = useDgld()
+  const dgldBalance = useTokenBalance(getDgldAddress(dgld))
 
   return (
     <Modal>
@@ -46,7 +46,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
 
         <Spacer />
         <Button
-          href={`https://etherscan.io/address/${account}`}
+          href={`https://ropsten.etherscan.io/address/${account}`}
           text="View on Etherscan"
           variant="secondary"
         />

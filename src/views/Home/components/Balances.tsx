@@ -8,13 +8,13 @@ import CardContent from '../../../components/CardContent'
 import Label from '../../../components/Label'
 import Spacer from '../../../components/Spacer'
 import Value from '../../../components/Value'
-import DefiGoldIcon from '../../../components/DefiGoldIcon'
+import DgldIcon from '../../../components/DgldIcon'
 import useAllEarnings from '../../../hooks/useAllEarnings'
 import useAllStakedValue from '../../../hooks/useAllStakedValue'
 import useFarms from '../../../hooks/useFarms'
 import useTokenBalance from '../../../hooks/useTokenBalance'
-import useDefiGold from '../../../hooks/useDefiGold'
-import { getDefiGoldAddress, getDefiGoldSupply } from '../../../dgld/utils'
+import useDgld from '../../../hooks/useDgld'
+import { getDgldAddress, getDgldSupply } from '../../../dgld/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 
 const PendingRewards: React.FC = () => {
@@ -71,13 +71,13 @@ const PendingRewards: React.FC = () => {
 
 const Balances: React.FC = () => {
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
-  const dgld = useDefiGold()
-  const dgldBalance = useTokenBalance(getDefiGoldAddress(dgld))
+  const dgld = useDgld()
+  const dgldBalance = useTokenBalance(getDgldAddress(dgld))
   const { account, ethereum }: { account: any; ethereum: any } = useWallet()
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const supply = await getDefiGoldSupply(dgld)
+      const supply = await getDgldSupply(dgld)
       setTotalSupply(supply)
     }
     if (dgld) {
@@ -91,7 +91,7 @@ const Balances: React.FC = () => {
         <CardContent>
           <StyledBalances>
             <StyledBalance>
-              <DefiGoldIcon />
+              <DgldIcon />
               <Spacer />
               <div style={{ flex: 1 }}>
                 <Label text="Your DGLD Balance" />
@@ -120,7 +120,7 @@ const Balances: React.FC = () => {
         </CardContent>
         <Footnote>
           New rewards per block
-          <FootnoteValue>1,000 DGLD</FootnoteValue>
+          <FootnoteValue>100 DGLD</FootnoteValue>
         </Footnote>
       </Card>
     </StyledWrapper>

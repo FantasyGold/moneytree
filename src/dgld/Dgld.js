@@ -6,7 +6,7 @@ import { EVM } from './lib/evm.js'
 
 import { contractAddresses } from './lib/constants'
 
-export class DefiGold {
+export class Dgld {
   constructor(provider, networkId, testing, options) {
     var realProvider
 

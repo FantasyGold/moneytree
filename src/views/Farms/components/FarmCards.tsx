@@ -14,7 +14,7 @@ import useAllStakedValue, {
   StakedValue,
 } from '../../../hooks/useAllStakedValue'
 import useFarms from '../../../hooks/useFarms'
-import useDefiGold from '../../../hooks/useDefiGold'
+import useDgld from '../../../hooks/useDgld'
 import { getEarned, getMiningManagerContract } from '../../../dgld/utils'
 import { bnToDec } from '../../../utils'
 
@@ -31,13 +31,15 @@ const FarmCards: React.FC = () => {
     ({ tokenSymbol }) => tokenSymbol === 'DGLD',
   )
 
+  console.log(stakedValue);
+
   const dgldPrice =
     dgldIndex >= 0 && stakedValue[dgldIndex]
       ? stakedValue[dgldIndex].tokenPriceInWeth
       : new BigNumber(0)
 
   const BLOCKS_PER_YEAR = new BigNumber(2336000)
-  const DGLD_PER_BLOCK = new BigNumber(1000)
+  const DGLD_PER_BLOCK = new BigNumber(100)
 
   const rows = farms.reduce<FarmWithStakedValue[][]>(
     (farmRows, farm, i) => {
@@ -78,7 +80,7 @@ const FarmCards: React.FC = () => {
         ))
       ) : (
         <StyledLoadingWrapper>
-          <Loader text="Cooking the rice ..." />
+          <Loader text="Smelting the Nuggets ..." />
         </StyledLoadingWrapper>
       )}
     </StyledCards>
@@ -95,7 +97,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
 
   const { account } = useWallet()
   const { lpTokenAddress } = farm
-  const dgld = useDefiGold()
+  const dgld = useDgld()
 
   const renderer = (countdownProps: CountdownRenderProps) => {
     const { hours, minutes, seconds } = countdownProps
@@ -135,7 +137,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             <CardIcon>{farm.icon}</CardIcon>
             <StyledTitle>{farm.name}</StyledTitle>
             <StyledDetails>
-              <StyledDetail>Deposit {farm.lpToken.toUpperCase()}</StyledDetail>
+              <StyledDetail>Deposit {farm.lpToken}</StyledDetail>
               <StyledDetail>Earn {farm.earnToken.toUpperCase()}</StyledDetail>
             </StyledDetails>
             <Spacer />
@@ -157,6 +159,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                 {farm.apy
                   ? `${farm.apy
                       .times(new BigNumber(100))
+                      .times(new BigNumber(3))
                       .toNumber()
                       .toLocaleString('en-US')
                       .slice(0, -1)}%`
@@ -183,7 +186,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
 }
 
 const RainbowLight = keyframes`
-  
+
 	0% {
 		background-position: 0% 50%;
 	}

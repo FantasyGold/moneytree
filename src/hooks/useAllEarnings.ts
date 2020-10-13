@@ -5,13 +5,13 @@ import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
 
 import { getEarned, getMiningManagerContract, getFarms } from '../dgld/utils'
-import useDefiGold from './useDefiGold'
+import useDgld from './useDgld'
 import useBlock from './useBlock'
 
 const useAllEarnings = () => {
   const [balances, setBalance] = useState([] as Array<BigNumber>)
   const { account }: { account: string; ethereum: provider } = useWallet()
-  const dgld = useDefiGold()
+  const dgld = useDgld()
   const farms = getFarms(dgld)
   const miningManagerContract = getMiningManagerContract(dgld)
   const block = useBlock()

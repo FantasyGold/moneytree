@@ -11,7 +11,7 @@ import {
   getFarms,
   getTotalLPWethValue,
 } from '../dgld/utils'
-import useDefiGold from './useDefiGold'
+import useDgld from './useDgld'
 import useBlock from './useBlock'
 
 export interface StakedValue {
@@ -25,7 +25,7 @@ export interface StakedValue {
 const useAllStakedValue = () => {
   const [balances, setBalance] = useState([] as Array<StakedValue>)
   const { account }: { account: string; ethereum: provider } = useWallet()
-  const dgld = useDefiGold()
+  const dgld = useDgld()
   const farms = getFarms(dgld)
   const miningManagerContract = getMiningManagerContract(dgld)
   const wethContact = getWethContract(dgld)

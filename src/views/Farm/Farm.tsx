@@ -7,7 +7,7 @@ import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
 import useFarm from '../../hooks/useFarm'
 import useRedeem from '../../hooks/useRedeem'
-import useDefiGold from '../../hooks/useDefiGold'
+import useDgld from '../../hooks/useDgld'
 import { getMiningManagerContract } from '../../dgld/utils'
 import { getContract } from '../../utils/erc20'
 import Harvest from './components/Harvest'
@@ -37,7 +37,7 @@ const Farm: React.FC = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  const dgld = useDefiGold()
+  const dgld = useDgld()
   const { ethereum } = useWallet()
 
   const lpContract = useMemo(() => {
@@ -47,7 +47,7 @@ const Farm: React.FC = () => {
   const { onRedeem } = useRedeem(getMiningManagerContract(dgld))
 
   const lpTokenName = useMemo(() => {
-    return lpToken.toUpperCase()
+    return lpToken
   }, [lpToken])
 
   const earnTokenName = useMemo(() => {
@@ -71,16 +71,22 @@ const Farm: React.FC = () => {
             <Stake
               lpContract={lpContract}
               pid={pid}
-              tokenName={lpToken.toUpperCase()}
+              tokenName={lpToken}
             />
           </StyledCardWrapper>
         </StyledCardsWrapper>
         <Spacer size="lg" />
         <StyledInfo>
           ⭐️ Every time you stake and unstake LP tokens, the contract will
-          automagically harvest DGLD rewards for you!
+          mine DefiGold rewards for you!
         </StyledInfo>
-        <Spacer size="lg" />
+        <Spacer size="md" />
+        <StyledLink
+          target="__blank"
+          href={`https://dgldswap.vision/pair/${lpTokenAddress}`} //TODO Update to goldswap vision
+        >
+          {lpTokenName} Info
+        </StyledLink>
       </StyledFarm>
     </>
   )
@@ -121,6 +127,16 @@ const StyledInfo = styled.h3`
   margin: 0;
   padding: 0;
   text-align: center;
+`
+
+const StyledLink = styled.a`
+  color: ${(props) => props.theme.color.grey[400]};
+  padding-left: ${(props) => props.theme.spacing[3]}px;
+  padding-right: ${(props) => props.theme.spacing[3]}px;
+  text-decoration: none;
+  &:hover {
+    color: ${(props) => props.theme.color.grey[500]};
+  }
 `
 
 export default Farm

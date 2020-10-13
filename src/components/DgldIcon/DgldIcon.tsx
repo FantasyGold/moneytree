@@ -1,13 +1,13 @@
 import React from 'react'
 
-interface DefiGoldIconProps {
+interface DgldIconProps {
   size?: number
   v1?: boolean
   v2?: boolean
   v3?: boolean
 }
 
-const DefiGoldIcon: React.FC<DefiGoldIconProps> = ({ size = 36, v1, v2, v3 }) => (
+const DgldIcon: React.FC<DgldIconProps> = ({ size = 36, v1, v2, v3 }) => (
   <span
     role="img"
     style={{
@@ -19,4 +19,4 @@ const DefiGoldIcon: React.FC<DefiGoldIconProps> = ({ size = 36, v1, v2, v3 }) =>
   </span>
 )
 
-export default DefiGoldIcon
+export default DgldIcon

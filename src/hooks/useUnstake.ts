@@ -1,13 +1,13 @@
 import { useCallback } from 'react'
 
-import useDefiGold from './useDefiGold'
+import useDgld from './useDgld'
 import { useWallet } from 'use-wallet'
 
 import { unstake, getMiningManagerContract } from '../dgld/utils'
 
 const useUnstake = (pid: number) => {
   const { account } = useWallet()
-  const dgld = useDefiGold()
+  const dgld = useDgld()
   const miningManagerContract = getMiningManagerContract(dgld)
 
   const handleUnstake = useCallback(

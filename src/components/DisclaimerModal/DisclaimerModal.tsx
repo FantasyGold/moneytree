@@ -1,4 +1,5 @@
 import React, { useCallback, useState, useMemo } from 'react'
+import styled from 'styled-components'
 
 import Button from '../Button'
 import CardIcon from '../CardIcon'
@@ -10,6 +11,15 @@ import ModalTitle from '../ModalTitle'
 interface DisclaimerModal extends ModalProps {
   onConfirm: () => void
 }
+
+const StyledLink = styled.a`
+  color: ${(props) => props.theme.color.grey[400]};
+  padding-left: 25%;
+  text-decoration: none;
+  &:hover {
+    color: ${(props) => props.theme.color.grey[500]};
+  }
+`
 
 const DisclaimerModal: React.FC<DisclaimerModal> = ({
   onConfirm,
@@ -26,31 +36,24 @@ const DisclaimerModal: React.FC<DisclaimerModal> = ({
     if (step === 'disclaimer') {
       return (
         <div>
-          <p>Audits: None.</p>
-          <p>
-            While the initial creators of the DefiGold protocol have made
-            reasonable efforts to attempt to ensure the security of the
-            contracts, including forking much of the codebase from existing
-            well-audited projects and soliciting review from friends, nothing
-            approaching the rigor of a formal audit has been conducted at this
-            time.
+          <p> Hello and Welcome to the initial launch of DefiGold and the GoldSwap
+              Exchange! The first step for FantasyGold Core in the Defi Space. 
           </p>
-          <p>
-            We STRONGLY urge caution to anyone who chooses to engage with these
-            contracts.
+          <p> GoldSwap is a fork of Uniswap that will be ported to the FantasyGold
+              Core Blockchain. Development will be on going.  
+          </p>
+          <p> FantasyGold supports Ethereum Virtual Machine based smart contracts and  
+              is secured by a proof of stake consensus model. An on-chain layer allows the
+              EVM to communicate with FantasyGold's Bitcoin-like UTXO blockchain.
           </p>
         </div>
       )
     } else {
       return (
         <div>
-          <p>Attention DGLD Uniswap LPs</p>
-          <p>
-            The only Uniswap pool that is compatible with DGLD is DGLD/yCRV
-            (Curve yPool tokens)
-          </p>
-          <p>Providing liquidity for other Uniswap pools is dangerous</p>
-          <p>You will LOSE your share of rebases</p>
+          <StyledLink target="_blank" href="https://discord.gg/xXtgPPW">
+            Click here to join the FGC Discord.
+          </StyledLink>
         </div>
       )
     }
@@ -66,14 +69,13 @@ const DisclaimerModal: React.FC<DisclaimerModal> = ({
         />
       )
     } else {
-      return <Button text="I understand" onClick={handleConfirm} />
+      return <Button text="Continue To DefiGold" onClick={handleConfirm} />
     }
   }, [setStep, step, handleConfirm])
 
   return (
     <Modal>
-      <ModalTitle text={`Warning`} />
-      <CardIcon>⚠️</CardIcon>
+      <ModalTitle text={`Announcement`} />
       <ModalContent>{modalContent}</ModalContent>
       <ModalActions>{button}</ModalActions>
     </Modal>

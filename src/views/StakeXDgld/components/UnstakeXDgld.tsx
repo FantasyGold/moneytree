@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components'
 import Button from '../../../components/Button'
 import Card from '../../../components/Card'
@@ -6,35 +6,51 @@ import CardContent from '../../../components/CardContent'
 import CardIcon from '../../../components/CardIcon'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
-import useEarnings from '../../../hooks/useEarnings'
 import useReward from '../../../hooks/useReward'
-import { getBalanceNumber } from '../../../utils/formatBalance'
+import {getBalanceNumber} from '../../../utils/formatBalance'
+import useTokenBalance from "../../../hooks/useTokenBalance";
+import {Contract} from "web3-eth-contract";
+import useModal from "../../../hooks/useModal";
+import WithdrawModal from "./WithdrawModal";
+import useLeave from "../../../hooks/useLeave";
 
 interface HarvestProps {
-  pid: number
+  lpContract: Contract
 }
 
-const Harvest: React.FC<HarvestProps> = ({ pid }) => {
-  const earnings = useEarnings(pid)
+const UnstakeXDgld: React.FC<HarvestProps> = ({lpContract}) => {
+
+  const xDgldBalance = useTokenBalance(lpContract.options.address)
   const [pendingTx, setPendingTx] = useState(false)
-  const { onReward } = useReward(pid)
+
+  const {onLeave} = useLeave()
+
+  const tokenName = "xDGLD"
+
+  const [onPresentLeave] = useModal(
+    <WithdrawModal
+      max={xDgldBalance}
+      onConfirm={onLeave}
+      tokenName={tokenName}
+    />,
+  )
 
   return (
     <Card>
       <CardContent>
         <StyledCardContentInner>
           <StyledCardHeader>
-            <CardIcon>💰</CardIcon>
-            <Value value={getBalanceNumber(earnings)} />
-            <Label text="DGLD Earned" />
+            <CardIcon>🏦</CardIcon>
+            <Value value={getBalanceNumber(xDgldBalance)}/>
+            <Label text="xDGLD Available"/>
           </StyledCardHeader>
           <StyledCardActions>
             <Button
-              disabled={!earnings.toNumber() || pendingTx}
-              text={pendingTx ? 'Collecting DGLD' : 'Harvest'}
+              disabled={!xDgldBalance.toNumber() || pendingTx}
+              text={pendingTx ? 'Converting to DGLD' : 'Convert to DGLD'}
               onClick={async () => {
                 setPendingTx(true)
-                await onReward()
+                await onPresentLeave()
                 setPendingTx(false)
               }}
             />
@@ -70,4 +86,4 @@ const StyledCardContentInner = styled.div`
   justify-content: space-between;
 `
 
-export default Harvest
+export default UnstakeXDgld

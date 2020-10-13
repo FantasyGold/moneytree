@@ -15,10 +15,16 @@ const Nav: React.FC = () => {
         Staking
       </StyledLink>
       <StyledAbsoluteLink
-        href="https://medium.com/dgldswap/the-dgldswap-project-c4049ea9941e"
+        href="https://goldswap.fgc.exchange"
         target="_blank"
       >
-        About
+        Exchange
+      </StyledAbsoluteLink>
+      <StyledAbsoluteLink
+        href="https://fantasygold.io/"
+        target="_blank"
+      >
+        About FGC
       </StyledAbsoluteLink>
     </StyledNav>
   )

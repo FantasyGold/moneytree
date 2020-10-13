@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
 import { useWallet } from 'use-wallet'
-import useDefiGold from '../../hooks/useDefiGold'
+import useDgld from '../../hooks/useDgld'
 
 import { bnToDec } from '../../utils'
 import { getMiningManagerContract, getEarned } from '../../dgld/utils'
@@ -13,7 +13,7 @@ import { Farm } from './types'
 const Farms: React.FC = ({ children }) => {
   const [unharvested, setUnharvested] = useState(0)
 
-  const dgld = useDefiGold()
+  const dgld = useDgld()
   const { account } = useWallet()
 
   const farms = getFarms(dgld)

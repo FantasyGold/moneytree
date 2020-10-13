@@ -42,20 +42,23 @@ const Button: React.FC<ButtonProps> = ({
   let fontSize: number
   switch (size) {
     case 'sm':
-      
+      boxShadow = `4px 4px 8px ${color.grey[300]},
+        -8px -8px 16px ${color.grey[100]}FF;`
       buttonPadding = spacing[3]
       buttonSize = 36
       fontSize = 14
       break
     case 'lg':
-      
+      boxShadow = `6px 6px 12px ${color.grey[300]},
+        -12px -12px 24px ${color.grey[100]}ff;`
       buttonPadding = spacing[4]
       buttonSize = 72
       fontSize = 16
       break
     case 'md':
     default:
-      
+      boxShadow = `6px 6px 12px ${color.grey[300]},
+        -12px -12px 24px -2px ${color.grey[100]}ff;`
       buttonPadding = spacing[4]
       buttonSize = 56
       fontSize = 16
@@ -73,7 +76,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <StyledButton
-      
+      boxShadow={boxShadow}
       color={buttonColor}
       disabled={disabled}
       fontSize={fontSize}
@@ -88,7 +91,7 @@ const Button: React.FC<ButtonProps> = ({
 }
 
 interface StyledButtonProps {
-  
+  boxShadow: string,
   color: string,
   disabled?: boolean,
   fontSize: number,
@@ -101,7 +104,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   background-color: ${props => props.theme.color.grey[200]};
   border: 0;
   border-radius: 12px;
-  
+  box-shadow: ${props => props.boxShadow};
   color: ${props => !props.disabled ? props.color : `${props.color}55`};
   cursor: pointer;
   display: flex;

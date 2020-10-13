@@ -16,7 +16,7 @@ const GAS_LIMIT = {
 export const getMiningManagerAddress = (dgld) => {
   return dgld && dgld.miningManagerAddress
 }
-export const getDefiGoldAddress = (dgld) => {
+export const getDgldAddress = (dgld) => {
   return dgld && dgld.dgldAddress
 }
 export const getWethContract = (dgld) => {
@@ -26,8 +26,12 @@ export const getWethContract = (dgld) => {
 export const getMiningManagerContract = (dgld) => {
   return dgld && dgld.contracts && dgld.contracts.miningManager
 }
-export const getDefiGoldContract = (dgld) => {
+export const getDgldContract = (dgld) => {
   return dgld && dgld.contracts && dgld.contracts.dgld
+}
+
+export const getXDgldStakingContract = (dgld) => {
+  return dgld && dgld.contracts && dgld.contracts.xDgldStaking
 }
 
 export const getFarms = (dgld) => {
@@ -70,7 +74,7 @@ export const getPoolWeight = async (miningManagerContract, pid) => {
 }
 
 export const getEarned = async (miningManagerContract, pid, account) => {
-  return miningManagerContract.methods.pendingDefiGold(pid, account).call()
+  return miningManagerContract.methods.pendingDgld(pid, account).call()
 }
 
 export const getTotalLPWethValue = async (
@@ -122,8 +126,18 @@ export const approve = async (lpContract, miningManagerContract, account) => {
     .send({ from: account })
 }
 
-export const getDefiGoldSupply = async (dgld) => {
+export const approveAddress = async (lpContract, address, account) => {
+  return lpContract.methods
+      .approve(address, ethers.constants.MaxUint256)
+      .send({ from: account })
+}
+
+export const getDgldSupply = async (dgld) => {
   return new BigNumber(await dgld.contracts.dgld.methods.totalSupply().call())
+}
+
+export const getXDgldSupply = async (dgld) => {
+  return new BigNumber(await dgld.contracts.xDgldStaking.methods.totalSupply().call())
 }
 
 export const stake = async (miningManagerContract, pid, amount, account) => {
@@ -185,4 +199,29 @@ export const redeem = async (miningManagerContract, account) => {
   } else {
     alert('pool not active')
   }
+}
+
+export const enter = async (contract, amount, account) => {
+  debugger
+  return contract.methods
+      .enter(
+          new BigNumber(amount).times(new BigNumber(10).pow(18)).toString(),
+      )
+      .send({ from: account })
+      .on('transactionHash', (tx) => {
+        console.log(tx)
+        return tx.transactionHash
+      })
+}
+
+export const leave = async (contract, amount, account) => {
+  return contract.methods
+      .leave(
+          new BigNumber(amount).times(new BigNumber(10).pow(18)).toString(),
+      )
+      .send({ from: account })
+      .on('transactionHash', (tx) => {
+        console.log(tx)
+        return tx.transactionHash
+      })
 }
