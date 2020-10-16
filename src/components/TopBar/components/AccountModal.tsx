@@ -2,8 +2,8 @@ import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { useWallet } from 'use-wallet'
 import useTokenBalance from '../../../hooks/useTokenBalance'
-import useDgld from '../../../hooks/useDgld'
-import { getDgldAddress } from '../../../dgld/utils'
+import useBlng from '../../../hooks/useBlng'
+import { getBlngAddress } from '../../../blng/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import Button from '../../Button'
 import CardIcon from '../../CardIcon'
@@ -23,8 +23,8 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
     reset()
   }, [onDismiss, reset])
 
-  const dgld = useDgld()
-  const dgldBalance = useTokenBalance(getDgldAddress(dgld))
+  const blng = useBlng()
+  const blngBalance = useTokenBalance(getBlngAddress(blng))
 
   return (
     <Modal>
@@ -38,8 +38,8 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
               <span>💰</span>
             </CardIcon>
             <StyledBalance>
-              <Value value={getBalanceNumber(dgldBalance)} />
-              <Label text="DGLD Balance" />
+              <Value value={getBalanceNumber(blngBalance)} />
+              <Label text="BLNG Balance" />
             </StyledBalance>
           </StyledBalanceWrapper>
         </div>

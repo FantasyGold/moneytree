@@ -4,32 +4,32 @@ import { provider } from 'web3-core'
 import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
 
-import { getEarned, getMiningManagerContract, getFarms } from '../dgld/utils'
-import useDgld from './useDgld'
+import { getEarned, getMoneyTreeContract, getFarms } from '../blng/utils'
+import useBlng from './useBlng'
 import useBlock from './useBlock'
 
 const useAllEarnings = () => {
   const [balances, setBalance] = useState([] as Array<BigNumber>)
   const { account }: { account: string; ethereum: provider } = useWallet()
-  const dgld = useDgld()
-  const farms = getFarms(dgld)
-  const miningManagerContract = getMiningManagerContract(dgld)
+  const blng = useBlng()
+  const farms = getFarms(blng)
+  const moneyTreeContract = getMoneyTreeContract(blng)
   const block = useBlock()
 
   const fetchAllBalances = useCallback(async () => {
     const balances: Array<BigNumber> = await Promise.all(
       farms.map(({ pid }: { pid: number }) =>
-        getEarned(miningManagerContract, pid, account),
+        getEarned(moneyTreeContract, pid, account),
       ),
     )
     setBalance(balances)
-  }, [account, miningManagerContract, dgld])
+  }, [account, moneyTreeContract, blng])
 
   useEffect(() => {
-    if (account && miningManagerContract && dgld) {
+    if (account && moneyTreeContract && blng) {
       fetchAllBalances()
     }
-  }, [account, block, miningManagerContract, setBalance, dgld])
+  }, [account, block, moneyTreeContract, setBalance, blng])
 
   return balances
 }

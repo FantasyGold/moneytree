@@ -6,12 +6,12 @@ import { useWallet } from 'use-wallet'
 import { Contract } from 'web3-eth-contract'
 
 import {
-  getMiningManagerContract,
+  getMoneyTreeContract,
   getWethContract,
   getFarms,
   getTotalLPWethValue,
-} from '../dgld/utils'
-import useDgld from './useDgld'
+} from '../blng/utils'
+import useBlng from './useBlng'
 import useBlock from './useBlock'
 
 export interface StakedValue {
@@ -25,10 +25,10 @@ export interface StakedValue {
 const useAllStakedValue = () => {
   const [balances, setBalance] = useState([] as Array<StakedValue>)
   const { account }: { account: string; ethereum: provider } = useWallet()
-  const dgld = useDgld()
-  const farms = getFarms(dgld)
-  const miningManagerContract = getMiningManagerContract(dgld)
-  const wethContact = getWethContract(dgld)
+  const blng = useBlng()
+  const farms = getFarms(blng)
+  const moneyTreeContract = getMoneyTreeContract(blng)
+  const wethContact = getWethContract(blng)
   const block = useBlock()
 
   const fetchAllStakedValue = useCallback(async () => {
@@ -44,7 +44,7 @@ const useAllStakedValue = () => {
           tokenContract: Contract
         }) =>
           getTotalLPWethValue(
-            miningManagerContract,
+            moneyTreeContract,
             wethContact,
             lpContract,
             tokenContract,
@@ -54,13 +54,13 @@ const useAllStakedValue = () => {
     )
 
     setBalance(balances)
-  }, [account, miningManagerContract, dgld])
+  }, [account, moneyTreeContract, blng])
 
   useEffect(() => {
-    if (account && miningManagerContract && dgld) {
+    if (account && moneyTreeContract && blng) {
       fetchAllStakedValue()
     }
-  }, [account, block, miningManagerContract, setBalance, dgld])
+  }, [account, block, moneyTreeContract, setBalance, blng])
 
   return balances
 }

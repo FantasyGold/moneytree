@@ -1,24 +1,24 @@
 import {useCallback} from 'react'
 
-import useDgld from './useDgld'
+import useBlng from './useBlng'
 import {useWallet} from 'use-wallet'
 
-import {leave, getXDgldStakingContract} from '../dgld/utils'
+import {leave, getXBlngStakingContract} from '../blng/utils'
 
 const useLeave = () => {
   const {account} = useWallet()
-  const dgld = useDgld()
+  const blng = useBlng()
 
   const handle = useCallback(
     async (amount: string) => {
       const txHash = await leave(
-        getXDgldStakingContract(dgld),
+        getXBlngStakingContract(blng),
         amount,
         account,
       )
       console.log(txHash)
     },
-    [account, dgld],
+    [account, blng],
   )
 
   return {onLeave: handle}

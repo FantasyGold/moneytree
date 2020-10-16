@@ -14,8 +14,8 @@ import useAllStakedValue, {
   StakedValue,
 } from '../../../hooks/useAllStakedValue'
 import useFarms from '../../../hooks/useFarms'
-import useDgld from '../../../hooks/useDgld'
-import { getEarned, getMiningManagerContract } from '../../../dgld/utils'
+import useBlng from '../../../hooks/useBlng'
+import { getEarned, getMoneyTreeContract } from '../../../blng/utils'
 import { bnToDec } from '../../../utils'
 
 interface FarmWithStakedValue extends Farm, StakedValue {
@@ -27,19 +27,19 @@ const FarmCards: React.FC = () => {
   const { account } = useWallet()
   const stakedValue = useAllStakedValue()
 
-  const dgldIndex = farms.findIndex(
-    ({ tokenSymbol }) => tokenSymbol === 'DGLD',
+  const blngIndex = farms.findIndex(
+    ({ tokenSymbol }) => tokenSymbol === 'BLNG',
   )
 
   console.log(stakedValue);
 
-  const dgldPrice =
-    dgldIndex >= 0 && stakedValue[dgldIndex]
-      ? stakedValue[dgldIndex].tokenPriceInWeth
+  const blngPrice =
+    blngIndex >= 0 && stakedValue[blngIndex]
+      ? stakedValue[blngIndex].tokenPriceInWeth
       : new BigNumber(0)
 
   const BLOCKS_PER_YEAR = new BigNumber(2336000)
-  const DGLD_PER_BLOCK = new BigNumber(100)
+  const BLNG_PER_BLOCK = new BigNumber(100)
 
   const rows = farms.reduce<FarmWithStakedValue[][]>(
     (farmRows, farm, i) => {
@@ -47,8 +47,8 @@ const FarmCards: React.FC = () => {
         ...farm,
         ...stakedValue[i],
         apy: stakedValue[i]
-          ? dgldPrice
-              .times(DGLD_PER_BLOCK)
+          ? blngPrice
+              .times(BLNG_PER_BLOCK)
               .times(BLOCKS_PER_YEAR)
               .times(stakedValue[i].poolWeight)
               .div(stakedValue[i].totalWethValue)
@@ -97,7 +97,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
 
   const { account } = useWallet()
   const { lpTokenAddress } = farm
-  const dgld = useDgld()
+  const blng = useBlng()
 
   const renderer = (countdownProps: CountdownRenderProps) => {
     const { hours, minutes, seconds } = countdownProps
@@ -113,24 +113,24 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
 
   useEffect(() => {
     async function fetchEarned() {
-      if (dgld) return
+      if (blng) return
       const earned = await getEarned(
-        getMiningManagerContract(dgld),
+        getMoneyTreeContract(blng),
         lpTokenAddress,
         account,
       )
       setHarvestable(bnToDec(earned))
     }
-    if (dgld && account) {
+    if (blng && account) {
       fetchEarned()
     }
-  }, [dgld, lpTokenAddress, account, setHarvestable])
+  }, [blng, lpTokenAddress, account, setHarvestable])
 
   const poolActive = true // startTime * 1000 - Date.now() <= 0
 
   return (
     <StyledCardWrapper>
-      {farm.tokenSymbol === 'DGLD' && <StyledCardAccent />}
+      {farm.tokenSymbol === 'BLNG' && <StyledCardAccent />}
       <Card>
         <CardContent>
           <StyledContent>

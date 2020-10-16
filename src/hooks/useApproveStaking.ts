@@ -1,19 +1,19 @@
 import {useCallback} from 'react'
 
-import useDgld from './useDgld'
+import useBlng from './useBlng'
 import {useWallet} from 'use-wallet'
 import {provider} from 'web3-core'
 import {
   approve,
-  getDgldContract,
-  getXDgldStakingContract
-} from '../dgld/utils'
+  getBlngContract,
+  getXBlngStakingContract
+} from '../blng/utils'
 
 const useApproveStaking = () => {
   const {account}: { account: string; ethereum: provider } = useWallet()
-  const dgld = useDgld()
-  const lpContract = getDgldContract(dgld)
-  const contract = getXDgldStakingContract(dgld)
+  const blng = useBlng()
+  const lpContract = getBlngContract(blng)
+  const contract = getXBlngStakingContract(blng)
 
   const handleApprove = useCallback(async () => {
     try {

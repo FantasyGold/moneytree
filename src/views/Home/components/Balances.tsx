@@ -8,13 +8,13 @@ import CardContent from '../../../components/CardContent'
 import Label from '../../../components/Label'
 import Spacer from '../../../components/Spacer'
 import Value from '../../../components/Value'
-import DgldIcon from '../../../components/DgldIcon'
+import BlngIcon from '../../../components/BlngIcon'
 import useAllEarnings from '../../../hooks/useAllEarnings'
 import useAllStakedValue from '../../../hooks/useAllStakedValue'
 import useFarms from '../../../hooks/useFarms'
 import useTokenBalance from '../../../hooks/useTokenBalance'
-import useDgld from '../../../hooks/useDgld'
-import { getDgldAddress, getDgldSupply } from '../../../dgld/utils'
+import useBlng from '../../../hooks/useBlng'
+import { getBlngAddress, getBlngSupply } from '../../../blng/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 
 const PendingRewards: React.FC = () => {
@@ -71,19 +71,19 @@ const PendingRewards: React.FC = () => {
 
 const Balances: React.FC = () => {
   const [totalSupply, setTotalSupply] = useState<BigNumber>()
-  const dgld = useDgld()
-  const dgldBalance = useTokenBalance(getDgldAddress(dgld))
+  const blng = useBlng()
+  const blngBalance = useTokenBalance(getBlngAddress(blng))
   const { account, ethereum }: { account: any; ethereum: any } = useWallet()
 
   useEffect(() => {
     async function fetchTotalSupply() {
-      const supply = await getDgldSupply(dgld)
+      const supply = await getBlngSupply(blng)
       setTotalSupply(supply)
     }
-    if (dgld) {
+    if (blng) {
       fetchTotalSupply()
     }
-  }, [dgld, setTotalSupply])
+  }, [blng, setTotalSupply])
 
   return (
     <StyledWrapper>
@@ -91,12 +91,12 @@ const Balances: React.FC = () => {
         <CardContent>
           <StyledBalances>
             <StyledBalance>
-              <DgldIcon />
+              <BlngIcon />
               <Spacer />
               <div style={{ flex: 1 }}>
-                <Label text="Your DGLD Balance" />
+                <Label text="Your BLNG Balance" />
                 <Value
-                  value={!!account ? getBalanceNumber(dgldBalance) : 'Locked'}
+                  value={!!account ? getBalanceNumber(blngBalance) : 'Locked'}
                 />
               </div>
             </StyledBalance>
@@ -105,7 +105,7 @@ const Balances: React.FC = () => {
         <Footnote>
           Pending harvest
           <FootnoteValue>
-            <PendingRewards /> DGLD
+            <PendingRewards /> BLNG
           </FootnoteValue>
         </Footnote>
       </Card>
@@ -113,14 +113,14 @@ const Balances: React.FC = () => {
 
       <Card>
         <CardContent>
-          <Label text="Total DGLD Supply" />
+          <Label text="Total BLNG Supply" />
           <Value
             value={totalSupply ? getBalanceNumber(totalSupply) : 'Locked'}
           />
         </CardContent>
         <Footnote>
           New rewards per block
-          <FootnoteValue>100 DGLD</FootnoteValue>
+          <FootnoteValue>10 BLNG</FootnoteValue>
         </Footnote>
       </Card>
     </StyledWrapper>

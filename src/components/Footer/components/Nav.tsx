@@ -6,15 +6,15 @@ const Nav: React.FC = () => {
     <StyledNav>
       <StyledLink
         target="_blank"
-        href="https://ropsten.etherscan.io/address/0xa097713ce5aa79c93bfc6fcbbfea8ffa89f91244#code"
+        href="https://ropsten.etherscan.io/address/0xD827C08864B6Ab8dDc0B4045200D692804Ed48b9#code"
       >
-        MiningManager Contract
+        MoneyTree Contract
       </StyledLink>
       {/*<StyledLink
         target="_blank"
         href="https://uniswap.info/pair/0xce84867c3c02b05dc570d0135103d3fb9cc19433"
       >
-        DefiGold DGLD-ETH
+        Bling BLNG-ETH
       </StyledLink> */}
       <StyledLink target="_blank" href="https://discord.gg/xXtgPPW">
         Discord

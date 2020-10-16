@@ -27,7 +27,7 @@ const Farms: React.FC = () => {
             <Route exact path={path}>
               <PageHeader
                 icon={<img src={chef} height="120" />}
-                subtitle="Earn DGLD tokens by staking DefiGold V2 SLP Tokens. Note: Current APY does not include 2/3rd DGLD emission that is locked and will be retroactively disbursed at a later date."
+                subtitle="Earn BLNG tokens by staking Bling V2 SLP Tokens. Note: Current APY does not include 2/3rd BLNG emission that is locked and will be retroactively disbursed at a later date."
                 title="Select A Lucky Mining Claim"
               />
               <FarmCards />

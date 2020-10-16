@@ -8,7 +8,7 @@ import TopBar from './components/TopBar'
 import FarmsProvider from './contexts/Farms'
 import ModalsProvider from './contexts/Modals'
 import TransactionProvider from './contexts/Transactions'
-import DgldProvider from './contexts/DgldProvider'
+import BlngProvider from './contexts/BlngProvider'
 import useModal from './hooks/useModal'
 import theme from './theme'
 import Farms from './views/Farms'
@@ -54,16 +54,16 @@ const Providers: React.FC = ({ children }) => {
       <UseWalletProvider
         chainId={3}
         connectors={{
-          walletconnect: { rpcUrl: 'https://ropsten.eth.aragon.network/' },
+          walletconnect: { rpcUrl: 'https://ropsten.infura.io/v3/066e579a2b4d4d3a8e5e72dbe19e5beb' },
         }}
       >
-        <DgldProvider>
+        <BlngProvider>
           <TransactionProvider>
             <FarmsProvider>
               <ModalsProvider>{children}</ModalsProvider>
             </FarmsProvider>
           </TransactionProvider>
-        </DgldProvider>
+        </BlngProvider>
       </UseWalletProvider>
     </ThemeProvider>
   )

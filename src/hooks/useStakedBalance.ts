@@ -3,27 +3,27 @@ import { useCallback, useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
 
-import { getStaked, getMiningManagerContract } from '../dgld/utils'
-import useDgld from './useDgld'
+import { getStaked, getMoneyTreeContract } from '../blng/utils'
+import useBlng from './useBlng'
 import useBlock from './useBlock'
 
 const useStakedBalance = (pid: number) => {
   const [balance, setBalance] = useState(new BigNumber(0))
   const { account }: { account: string } = useWallet()
-  const dgld = useDgld()
-  const miningManagerContract = getMiningManagerContract(dgld)
+  const blng = useBlng()
+  const moneyTreeContract = getMoneyTreeContract(blng)
   const block = useBlock()
 
   const fetchBalance = useCallback(async () => {
-    const balance = await getStaked(miningManagerContract, pid, account)
+    const balance = await getStaked(moneyTreeContract, pid, account)
     setBalance(new BigNumber(balance))
-  }, [account, pid, dgld])
+  }, [account, pid, blng])
 
   useEffect(() => {
-    if (account && dgld) {
+    if (account && blng) {
       fetchBalance()
     }
-  }, [account, pid, setBalance, block, dgld])
+  }, [account, pid, setBalance, block, blng])
 
   return balance
 }

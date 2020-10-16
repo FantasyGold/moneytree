@@ -1,21 +1,21 @@
 import { useCallback } from 'react'
 
-import useDgld from './useDgld'
+import useBlng from './useBlng'
 import { useWallet } from 'use-wallet'
 
-import { unstake, getMiningManagerContract } from '../dgld/utils'
+import { unstake, getMoneyTreeContract } from '../blng/utils'
 
 const useUnstake = (pid: number) => {
   const { account } = useWallet()
-  const dgld = useDgld()
-  const miningManagerContract = getMiningManagerContract(dgld)
+  const blng = useBlng()
+  const moneyTreeContract = getMoneyTreeContract(blng)
 
   const handleUnstake = useCallback(
     async (amount: string) => {
-      const txHash = await unstake(miningManagerContract, pid, amount, account)
+      const txHash = await unstake(moneyTreeContract, pid, amount, account)
       console.log(txHash)
     },
-    [account, pid, dgld],
+    [account, pid, blng],
   )
 
   return { onUnstake: handleUnstake }

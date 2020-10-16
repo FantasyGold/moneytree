@@ -4,8 +4,8 @@ import { provider } from 'web3-core'
 import BigNumber from 'bignumber.js'
 import { useWallet } from 'use-wallet'
 
-import { getEarned, getMiningManagerContract } from '../dgld/utils'
-import useDgld from './useDgld'
+import { getEarned, getMoneyTreeContract } from '../blng/utils'
+import useBlng from './useBlng'
 import useBlock from './useBlock'
 
 const useEarnings = (pid: number) => {
@@ -14,20 +14,20 @@ const useEarnings = (pid: number) => {
     account,
     ethereum,
   }: { account: string; ethereum: provider } = useWallet()
-  const dgld = useDgld()
-  const miningManagerContract = getMiningManagerContract(dgld)
+  const blng = useBlng()
+  const moneyTreeContract = getMoneyTreeContract(blng)
   const block = useBlock()
 
   const fetchBalance = useCallback(async () => {
-    const balance = await getEarned(miningManagerContract, pid, account)
+    const balance = await getEarned(moneyTreeContract, pid, account)
     setBalance(new BigNumber(balance))
-  }, [account, miningManagerContract, dgld])
+  }, [account, moneyTreeContract, blng])
 
   useEffect(() => {
-    if (account && miningManagerContract && dgld) {
+    if (account && moneyTreeContract && blng) {
       fetchBalance()
     }
-  }, [account, block, miningManagerContract, setBalance, dgld])
+  }, [account, block, moneyTreeContract, setBalance, blng])
 
   return balance
 }

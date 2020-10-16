@@ -7,8 +7,8 @@ import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
 import useFarm from '../../hooks/useFarm'
 import useRedeem from '../../hooks/useRedeem'
-import useDgld from '../../hooks/useDgld'
-import { getMiningManagerContract } from '../../dgld/utils'
+import useBlng from '../../hooks/useBlng'
+import { getMoneyTreeContract } from '../../blng/utils'
 import { getContract } from '../../utils/erc20'
 import Harvest from './components/Harvest'
 import Stake from './components/Stake'
@@ -37,14 +37,14 @@ const Farm: React.FC = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  const dgld = useDgld()
+  const blng = useBlng()
   const { ethereum } = useWallet()
 
   const lpContract = useMemo(() => {
     return getContract(ethereum as provider, lpTokenAddress)
   }, [ethereum, lpTokenAddress])
 
-  const { onRedeem } = useRedeem(getMiningManagerContract(dgld))
+  const { onRedeem } = useRedeem(getMoneyTreeContract(blng))
 
   const lpTokenName = useMemo(() => {
     return lpToken
@@ -78,12 +78,12 @@ const Farm: React.FC = () => {
         <Spacer size="lg" />
         <StyledInfo>
           ⭐️ Every time you stake and unstake LP tokens, the contract will
-          mine DefiGold rewards for you!
+          Pick Bling from the MoneyTree for you!
         </StyledInfo>
         <Spacer size="md" />
         <StyledLink
           target="__blank"
-          href={`https://dgldswap.vision/pair/${lpTokenAddress}`} //TODO Update to goldswap vision
+          href={`https://bling.vision/pair/${lpTokenAddress}`} //TODO Update to bling vision
         >
           {lpTokenName} Info
         </StyledLink>

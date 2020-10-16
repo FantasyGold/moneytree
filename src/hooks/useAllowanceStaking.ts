@@ -1,20 +1,20 @@
 import {useCallback, useEffect, useState} from 'react'
 
 import BigNumber from 'bignumber.js'
-import useDgld from './useDgld'
+import useBlng from './useBlng'
 import {useWallet} from 'use-wallet'
 import {provider} from 'web3-core'
 import {Contract} from 'web3-eth-contract'
 
 import {getAllowance} from '../utils/erc20'
-import {getMiningManagerContract, getDgldContract, getXDgldStakingContract} from '../dgld/utils'
+import {getMoneyTreeContract, getBlngContract, getXBlngStakingContract} from '../blng/utils'
 
 const useAllowanceStaking = () => {
   const [allowance, setAllowance] = useState(new BigNumber(0))
   const {account}: { account: string; ethereum: provider } = useWallet()
-  const dgld = useDgld()
-  const lpContract = getDgldContract(dgld)
-  const stakingContract = getXDgldStakingContract(dgld)
+  const blng = useBlng()
+  const lpContract = getBlngContract(blng)
+  const stakingContract = getXBlngStakingContract(blng)
 
   const fetchAllowance = useCallback(async () => {
     const allowance = await getAllowance(

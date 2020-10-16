@@ -36,10 +36,10 @@ const DisclaimerModal: React.FC<DisclaimerModal> = ({
     if (step === 'disclaimer') {
       return (
         <div>
-          <p> Hello and Welcome to the initial launch of DefiGold and the GoldSwap
+          <p> Welcome to the initial launch of Bling Finance, the MoneyTree the BlingSwap
               Exchange! The first step for FantasyGold Core in the Defi Space. 
           </p>
-          <p> GoldSwap is a fork of Uniswap that will be ported to the FantasyGold
+          <p> BlingSwap is a fork of Uniswap that will be ported to the FantasyGold
               Core Blockchain. Development will be on going.  
           </p>
           <p> FantasyGold supports Ethereum Virtual Machine based smart contracts and  
@@ -69,7 +69,7 @@ const DisclaimerModal: React.FC<DisclaimerModal> = ({
         />
       )
     } else {
-      return <Button text="Continue To DefiGold" onClick={handleConfirm} />
+      return <Button text="Continue To MoneyTree" onClick={handleConfirm} />
     }
   }, [setStep, step, handleConfirm])
 

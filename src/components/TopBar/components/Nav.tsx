@@ -15,7 +15,7 @@ const Nav: React.FC = () => {
         Staking
       </StyledLink>
       <StyledAbsoluteLink
-        href="https://goldswap.fgc.exchange"
+        href="https://swap.bling.network"
         target="_blank"
       >
         Exchange
