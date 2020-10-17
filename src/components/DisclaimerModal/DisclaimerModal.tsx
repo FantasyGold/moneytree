@@ -37,14 +37,15 @@ const DisclaimerModal: React.FC<DisclaimerModal> = ({
       return (
         <div>
           <p> Welcome to the initial launch of Bling Finance, the MoneyTree the BlingSwap
-              Exchange! The first step for FantasyGold Core in the Defi Space. 
+          Exchange! The first step for FantasyGold Core in the Defi Space.
           </p>
           <p> BlingSwap is a fork of Uniswap that will be ported to the FantasyGold
-              Core Blockchain. Development will be on going.  
+          Core Blockchain. In FantasyGold Blockchain, transactions fee will be paid in FantasyGold,
+          so need to worry about high gas price. Development will be on going.
           </p>
-          <p> FantasyGold supports Ethereum Virtual Machine based smart contracts and  
-              is secured by a proof of stake consensus model. An on-chain layer allows the
-              EVM to communicate with FantasyGold's Bitcoin-like UTXO blockchain.
+          <p> FantasyGold supports Ethereum Virtual Machine based smart contracts and
+          is secured by a proof of stake consensus model. An on-chain layer allows the
+          EVM to communicate with FantasyGold's Bitcoin-like UTXO blockchain.
           </p>
         </div>
       )
