@@ -1,4 +1,4 @@
-export const blng = '0xE2796Ec28d4d7C3313cC90EAf193C321df0Bb103'
-export const blngv2 = '0x11d5809715F4BdB9415cEf4c14BD6a4EF51B0a48'
+export const blng = '0xe5e7BBA3dC29BD3d7AFdFDBD40903C74d2549E1C'
+export const blngv2 = '0xEBA07Cc1d409E06a99A90E18B8e42D6613fd73f4'
 export const blngAddress = '0x75Aed7B23Ac348bf0bA1DCE8a03266ab0866eFCd'
-export const moneyTreeAddress = '0xD827C08864B6Ab8dDc0B4045200D692804Ed48b9'
+export const moneyTreeAddress = '0xA07eA3542FAa728D0452A61D0dD23354DaE3DFec'

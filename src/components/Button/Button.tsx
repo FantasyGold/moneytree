@@ -104,7 +104,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   background-color: ${props => props.theme.color.grey[200]};
   border: 0;
   border-radius: 12px;
-  box-shadow: ${props => props.boxShadow};
+  
   color: ${props => !props.disabled ? props.color : `${props.color}55`};
   cursor: pointer;
   display: flex;

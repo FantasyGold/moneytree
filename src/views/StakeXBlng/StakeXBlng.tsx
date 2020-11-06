@@ -17,7 +17,7 @@ const StakeXBlng: React.FC = () => {
   const {
     tokenAddress,
   } = {
-    tokenAddress: contractAddresses.xBlng[3],
+    tokenAddress: contractAddresses.xBlng[4],
   }
 
   const [totalSupply, setTotalSupply] = useState<BigNumber>()

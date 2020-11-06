@@ -83,7 +83,7 @@ const Farm: React.FC = () => {
         <Spacer size="md" />
         <StyledLink
           target="__blank"
-          href={`https://bling.vision/pair/${lpTokenAddress}`} //TODO Update to bling vision
+          href={`https://vision.bling.network/pair/${lpTokenAddress}`} //TODO Update to bling vision
         >
           {lpTokenName} Info
         </StyledLink>
